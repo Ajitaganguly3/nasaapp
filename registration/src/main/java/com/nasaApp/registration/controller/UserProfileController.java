@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nasaApp.registration.dto.MessageResponse;
@@ -19,6 +20,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
+@RequestMapping("/register")
 public class UserProfileController {
 
 	UserProfileService userProfileService;
@@ -33,7 +35,7 @@ public class UserProfileController {
 			@ApiResponse(responseCode = "200", description = "User registered successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MessageResponse.class))),
 			@ApiResponse(responseCode = "400", description = "Username already exist or Password validation failed", content = @Content) })
 
-	@PostMapping("/register")
+	@PostMapping
 	public ResponseEntity<MessageResponse> register(@RequestBody UserProfileDTO userProfileDTO)
 			throws InvalidPasswordException, UsernameAlreadyExistException {
 		MessageResponse messageResponse = userProfileService.register(userProfileDTO);

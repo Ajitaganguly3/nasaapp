@@ -1,4 +1,4 @@
-package com.nasaApp.registration.entity;
+package com.nasaApp.login.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -7,13 +7,18 @@ public class Role implements GrantedAuthority {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 290294949548292570L;
+	private static final long serialVersionUID = -648221643213015730L;
+
 	private String role;
 
 	@Override
 	public String getAuthority() {
 		// TODO Auto-generated method stub
-		return null;
+		return role;
+	}
+
+	public Role() {
+
 	}
 
 	public String getRole() {
@@ -22,10 +27,6 @@ public class Role implements GrantedAuthority {
 
 	public void setRole(String role) {
 		this.role = role;
-	}
-
-	public Role() {
-
 	}
 
 }

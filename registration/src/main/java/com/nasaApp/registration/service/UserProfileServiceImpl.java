@@ -21,6 +21,9 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 	@Autowired
 	private UserProfileRepository userProfileRepository;
+	
+
+
 
 	@Override
 	public MessageResponse register(@Valid UserProfileDTO userProfileDto)
@@ -49,7 +52,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 		userProfile.setConfirmPassword(userProfileDto.getConfirmPassword());
 		userProfile.setEmail(userProfileDto.getEmail());
 		userProfile.setContactNumber(userProfileDto.getContactNumber());
-		userProfile.setRoles(userProfileDto.getRoles());
+		
 
 		return new MessageResponse("User Registered Successfully!", HttpStatus.OK);
 	}

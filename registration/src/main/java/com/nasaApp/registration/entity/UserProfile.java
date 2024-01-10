@@ -2,10 +2,16 @@ package com.nasaApp.registration.entity;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 @Entity
+
 public class UserProfile {
 
 	@Id
@@ -16,7 +22,7 @@ public class UserProfile {
 	private String confirmPassword;
 	private String contactNumber;
 	private String email;
-	private Set<Role> roles;
+
 
 	public String getUsername() {
 		return username;
@@ -72,14 +78,6 @@ public class UserProfile {
 
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
-	}
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
 	}
 
 }

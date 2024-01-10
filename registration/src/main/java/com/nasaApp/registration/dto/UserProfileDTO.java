@@ -1,9 +1,5 @@
 package com.nasaApp.registration.dto;
 
-import java.util.Set;
-
-import com.nasaApp.registration.entity.Role;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -24,7 +20,6 @@ public class UserProfileDTO {
 	private String password;
 	@Min(value = 8, message = "Password should be of length 8 atleast")
 	private String confirmPassword;
-	private Set<Role> roles;
 
 	public String getFirstName() {
 		return firstName;
@@ -80,14 +75,6 @@ public class UserProfileDTO {
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
-	}
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
 	}
 
 }
