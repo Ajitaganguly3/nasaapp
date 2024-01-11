@@ -1,17 +1,9 @@
 package com.nasaApp.registration.entity;
 
-import java.util.Set;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-
-@Entity
-
+@Document(collection = "userprofile")
 public class UserProfile {
 
 	@Id
@@ -22,7 +14,6 @@ public class UserProfile {
 	private String confirmPassword;
 	private String contactNumber;
 	private String email;
-
 
 	public String getUsername() {
 		return username;

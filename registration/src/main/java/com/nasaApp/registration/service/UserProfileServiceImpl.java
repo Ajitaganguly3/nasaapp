@@ -1,5 +1,6 @@
 package com.nasaApp.registration.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.nasaApp.registration.dto.MessageResponse;
 import com.nasaApp.registration.dto.UserProfileDTO;
 import com.nasaApp.registration.entity.UserProfile;
 import com.nasaApp.registration.exceptions.InvalidPasswordException;
+import com.nasaApp.registration.exceptions.UserNotFoundException;
 import com.nasaApp.registration.exceptions.UsernameAlreadyExistException;
 import com.nasaApp.registration.repository.UserProfileRepository;
 import com.nasaApp.registration.validation.UserProfileValidation;
@@ -21,9 +23,6 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 	@Autowired
 	private UserProfileRepository userProfileRepository;
-	
-
-
 
 	@Override
 	public MessageResponse register(@Valid UserProfileDTO userProfileDto)
@@ -52,9 +51,17 @@ public class UserProfileServiceImpl implements UserProfileService {
 		userProfile.setConfirmPassword(userProfileDto.getConfirmPassword());
 		userProfile.setEmail(userProfileDto.getEmail());
 		userProfile.setContactNumber(userProfileDto.getContactNumber());
-		
+		userProfileRepository.save(userProfile);
 
 		return new MessageResponse("User Registered Successfully!", HttpStatus.OK);
+	}
+
+	@Override
+	public UserProfile getUserInfo(String username) throws UserNotFoundException {
+		// TODO Auto-generated method stub
+		return userProfileRepository.findByUsername(username)
+				.orElseThrow(() -> new UserNotFoundException("User not found!"));
+
 	}
 
 }
