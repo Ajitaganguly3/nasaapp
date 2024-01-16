@@ -1,6 +1,5 @@
 package com.nasaApp.registration.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.nasaApp.registration.dto.MessageResponse;
+import com.nasaApp.registration.dto.UserCredentialsResponse;
 import com.nasaApp.registration.dto.UserProfileDTO;
 import com.nasaApp.registration.entity.UserProfile;
 import com.nasaApp.registration.exceptions.InvalidPasswordException;
@@ -57,11 +57,19 @@ public class UserProfileServiceImpl implements UserProfileService {
 	}
 
 	@Override
-	public UserProfile getUserInfo(String username) throws UserNotFoundException {
+	public UserCredentialsResponse getUserInfo(String username) throws UserNotFoundException {
 		// TODO Auto-generated method stub
-		return userProfileRepository.findByUsername(username)
-				.orElseThrow(() -> new UserNotFoundException("User not found!"));
+		Optional<UserProfile> optionalUser = userProfileRepository.findByUsername(username);
+		if (optionalUser.isPresent()) {
+			UserProfile user = optionalUser.get();
+			UserCredentialsResponse userCredentialsResponse = new UserCredentialsResponse();
+			userCredentialsResponse.setUsername(user.getUsername());
+			userCredentialsResponse.setPassword(user.getPassword());
+			return userCredentialsResponse;
 
+		} else {
+			throw new UserNotFoundException("Username doesn't exist!");
+		}
 	}
 
 }

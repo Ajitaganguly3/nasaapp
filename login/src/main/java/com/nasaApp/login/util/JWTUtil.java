@@ -16,7 +16,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JWTUtil {
 
 	private static final String secretKey = "${jwt.secret}";
-
 	private long expirationTime = 1000 * 60 * 60;
 
 	public String extractUsername(String token) {
@@ -57,5 +56,4 @@ public class JWTUtil {
 			return false;
 		}
 	}
-
 }

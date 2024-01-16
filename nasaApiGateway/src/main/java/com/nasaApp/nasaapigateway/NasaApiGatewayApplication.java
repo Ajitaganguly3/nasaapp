@@ -2,11 +2,13 @@ package com.nasaApp.nasaapigateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
+@EnableDiscoveryClient
 public class NasaApiGatewayApplication {
 
 //	@Autowired
@@ -21,7 +23,9 @@ public class NasaApiGatewayApplication {
 
 		return builder.routes()
 
-				.route(route -> route.path("/api/register/**").uri("lb://registration-service")).build();
+				.route("registration-service", route -> route.path("/user/**").uri("lb://REGISTRATION-SERVICE"))
+				.route("auth-service", route -> route.path("/auth/**").uri("lb://AUTH-SERVICE"))
+				.build();
 
 	}
 

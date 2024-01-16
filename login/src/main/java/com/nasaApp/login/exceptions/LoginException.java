@@ -5,7 +5,7 @@ public class LoginException extends Exception {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -7070324322655143955L;
+	private static final long serialVersionUID = -7540198186582697485L;
 
 	public LoginException() {
 
