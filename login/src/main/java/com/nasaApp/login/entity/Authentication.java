@@ -24,4 +24,14 @@ public class Authentication {
 		this.password = password;
 	}
 
+	public Authentication() {
+
+	}
+
+	public Authentication(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
 }

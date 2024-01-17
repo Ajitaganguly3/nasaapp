@@ -1,7 +1,7 @@
 package com.nasaApp.login.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,14 +20,13 @@ public class AuthController {
 	private AuthService authService;
 
 	@PostMapping("/authenticate")
-	public ResponseEntity<?> login(@RequestBody Authentication authentication) throws LoginException {
-		try {
-			SuccessResponse successResponse = authService.login(authentication);
-			return ResponseEntity.ok(successResponse);
-		} catch (LoginException e) {
-			// TODO: handle exception
-			throw new LoginException("Enter correct username or password");
-		}
+	public SuccessResponse login(@RequestBody Authentication authentication) throws LoginException {
+		return authService.authenticateUser(authentication);
+	}
+
+	@GetMapping("/health")
+	public String healthCheck() {
+		return "OK";
 	}
 
 }

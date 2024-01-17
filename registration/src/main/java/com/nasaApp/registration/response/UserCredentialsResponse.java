@@ -1,7 +1,6 @@
-package com.nasaApp.login.dto;
+package com.nasaApp.registration.response;
 
-public class AuthenticationDTO {
-
+public class UserCredentialsResponse {
 	private String username;
 	private String password;
 

@@ -1,11 +1,8 @@
 package com.nasaApp.login.util;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Function;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
@@ -33,27 +30,10 @@ public class JWTUtil {
 
 	}
 
-	public String generateToken(UserDetails userDetails) {
-		Map<String, Object> claims = new HashMap<>();
-		return createToken(claims, userDetails.getUsername());
-	}
+	public String generateToken(String username) {
 
-//create the token
-	private String createToken(Map<String, Object> claims, String subject) {
-		String compact = Jwts.builder().setClaims(claims).setSubject(subject)
-				.setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + expirationTime))// token valid for 60 minutes
+		return Jwts.builder().setSubject(username).setExpiration(new Date(System.currentTimeMillis() + expirationTime))
 				.signWith(SignatureAlgorithm.HS256, secretKey).compact();
-		return compact;
 	}
 
-//validate the token
-	public Boolean validateToken(String token) {
-		try {
-			Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
 }

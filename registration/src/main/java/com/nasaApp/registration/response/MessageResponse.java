@@ -1,4 +1,4 @@
-package com.nasaApp.registration.dto;
+package com.nasaApp.registration.response;
 
 import org.springframework.http.HttpStatus;
 

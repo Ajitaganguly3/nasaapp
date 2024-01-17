@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nasaApp.registration.dto.MessageResponse;
-import com.nasaApp.registration.dto.UserCredentialsResponse;
 import com.nasaApp.registration.dto.UserProfileDTO;
 import com.nasaApp.registration.exceptions.InvalidPasswordException;
 import com.nasaApp.registration.exceptions.UserNotFoundException;
 import com.nasaApp.registration.exceptions.UsernameAlreadyExistException;
+import com.nasaApp.registration.response.MessageResponse;
+import com.nasaApp.registration.response.UserCredentialsResponse;
 import com.nasaApp.registration.service.UserProfileService;
 
 import io.swagger.v3.oas.annotations.Operation;

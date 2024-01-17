@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nasaapp.apod.service.ApodService;
 
 @RestController
+@RequestMapping("/apod")
 public class ApodController {
 
 	// private static final Logger log = LoggerFactory.getLogger(Apod.class);
@@ -19,7 +21,7 @@ public class ApodController {
 	@Autowired
 	private ApodService apodService;
 
-	@GetMapping("/data")
+	@GetMapping("/getApods")
 	public ResponseEntity<?> getApods() {
 		List<Map<String, Object>> dataList = apodService.getApods();
 		return new ResponseEntity<>(dataList, HttpStatus.OK);
@@ -32,11 +34,10 @@ public class ApodController {
 //		return new ResponseEntity<>(apod, HttpStatus.OK);
 //	}
 //
-//	@GetMapping("/apodByDate")
-//	public ResponseEntity<Apod> getPictureByDate(String Date) {
-//
-//		Apod apod = apodService.getPictureByDate(Date);
-//		return new ResponseEntity<>(apod, HttpStatus.OK);
-//	}
+	@GetMapping("/apodByDate")
+	public Map<String, Object> getPictureByDate(String Date) {
+		return apodService.getApodByDate(Date);
+
+	}
 
 }

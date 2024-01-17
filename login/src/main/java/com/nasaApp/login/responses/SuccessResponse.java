@@ -8,6 +8,16 @@ public class SuccessResponse {
 
 	private String username;
 
+	private String token;
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 	public String getMessage() {
 		return message;
 	}
@@ -24,9 +34,16 @@ public class SuccessResponse {
 		this.username = username;
 	}
 
+	public SuccessResponse(String message, String username, String token) {
+		super();
+		this.message = message;
+		this.username = username;
+		this.token = token;
+	}
+
 	public SuccessResponse(String message, HttpStatus ok) {
+		// TODO Auto-generated constructor stub
 		super();
 
 	}
-
 }

@@ -1,11 +1,11 @@
 package com.nasaApp.registration.service;
 
-import com.nasaApp.registration.dto.MessageResponse;
-import com.nasaApp.registration.dto.UserCredentialsResponse;
 import com.nasaApp.registration.dto.UserProfileDTO;
 import com.nasaApp.registration.exceptions.InvalidPasswordException;
 import com.nasaApp.registration.exceptions.UserNotFoundException;
 import com.nasaApp.registration.exceptions.UsernameAlreadyExistException;
+import com.nasaApp.registration.response.MessageResponse;
+import com.nasaApp.registration.response.UserCredentialsResponse;
 
 public interface UserProfileService {
 

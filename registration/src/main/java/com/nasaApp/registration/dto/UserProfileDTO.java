@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotEmpty;
 
 public class UserProfileDTO {
 
+	private String id;
+
 	@NotEmpty(message = "First Name cannot be empty or null")
 	private String firstName;
 	@NotEmpty(message = "Last Name cannot be empty or null")
@@ -20,6 +22,14 @@ public class UserProfileDTO {
 	private String password;
 	@Min(value = 8, message = "Password should be of length 8 atleast")
 	private String confirmPassword;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getFirstName() {
 		return firstName;

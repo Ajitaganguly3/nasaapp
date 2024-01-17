@@ -10,7 +10,7 @@ public interface ApodService {
 //	public Apod getPictureByDate(String date);
 
 	public List<Map<String, Object>> getApods();
-	
-	public Map<String, Object> getPostById(int id) 
+
+	Map<String, Object> getApodByDate(String id);
 
 }

@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class UserProfile {
 
 	@Id
+	private String _id;
 	private String username;
 	private String firstName;
 	private String lastName;

@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.nasaApp.registration.dto.MessageResponse;
-import com.nasaApp.registration.dto.UserCredentialsResponse;
 import com.nasaApp.registration.dto.UserProfileDTO;
 import com.nasaApp.registration.entity.UserProfile;
 import com.nasaApp.registration.exceptions.InvalidPasswordException;
 import com.nasaApp.registration.exceptions.UserNotFoundException;
 import com.nasaApp.registration.exceptions.UsernameAlreadyExistException;
 import com.nasaApp.registration.repository.UserProfileRepository;
+import com.nasaApp.registration.response.MessageResponse;
+import com.nasaApp.registration.response.UserCredentialsResponse;
 import com.nasaApp.registration.validation.UserProfileValidation;
 
 import jakarta.validation.Valid;
