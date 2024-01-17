@@ -1,13 +1,18 @@
 package com.nasaapp.wishlist.service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import com.nasaapp.wishlist.entity.Apod;
+import com.nasaapp.wishlist.repository.WishlistRepository;
 
 @Service
 public class WishlistServiceImpl implements WishlistService {
@@ -15,48 +20,43 @@ public class WishlistServiceImpl implements WishlistService {
 	@Autowired
 	RestTemplate restTemplate;
 
-	private Map<String, String> wishlist = new HashMap<>();
+	@Autowired
+	WishlistRepository wishlistRepository;
 
-	private static final String apiKey = "5SjXN0KlUvLdGePPjV3jwS452DePfleVFWP15mKy";
+	String baseUrl = "https://api.nasa.gov/planetary/";
 
-	@Override
-	public void addToWishList(String imageUrl) {
-		// TODO Auto-generated method stub
-
-		String title = getTitleFromNasaApi(imageUrl);
-		wishlist.put(imageUrl, title);
-
-	}
+	StringBuilder stringBuilder = new StringBuilder(baseUrl);
+	String apiUrl = "/apod?api_key=5SjXN0KlUvLdGePPjV3jwS452DePfleVFWP15mKy";
+	String dateUrl = apiUrl + "&date=";
 
 	@Override
-	public List<Map<String, String>> getWishlist() {
+	public void addToWishlist(String date) {
 		// TODO Auto-generated method stub
+		String url = baseUrl + dateUrl + date;
 
-		List<Map<String, String>> wishlistItems = new ArrayList<>();
-		wishlist.forEach((url, title) -> {
-			Map<String, String> item = new HashMap<>();
-			item.put("url", url);
-			item.put("title", title);
-			wishlistItems.add(item);
-		});
-		return wishlistItems;
-	}
-
-	@Override
-	public void removeFromWishlist(String imageUrl) {
-		// TODO Auto-generated method stub
-		wishlist.remove(imageUrl);
-
-	}
-
-	private String getTitleFromNasaApi(String imageUrl) {
-		String url = "https://api.nasa.gov/planetary/apod?api_key=" + apiKey + "&hd=" + imageUrl;
-		Map<String, Object> response = restTemplate.getForObject(url, Map.class);
-		if (response != null && response.containsKey("title")) {
-			return (String) response.get("title");
-		} else {
-			return "unknown title";
+		try {
+			// Make a request to the NASA API
+			ResponseEntity<Apod> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
+					new HttpEntity<>(gethttpHeaders()), Apod.class);
+			Apod apod = responseEntity.getBody();
+			String imageUrl = apod.getUrl();
+			String title = apod.getTitle();
+			Apod wishlistItem = new Apod();
+			wishlistItem.setTitle(title);
+			wishlistItem.setHdurl(imageUrl);
+			wishlistRepository.save(wishlistItem);
+		} catch (Exception e) {
+			// Handle exceptions, log, or return an error response as needed
+			e.printStackTrace();
 		}
+
+	}
+
+	private HttpHeaders gethttpHeaders() {
+		HttpHeaders headers = new HttpHeaders();
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		return headers;
 	}
 
 }

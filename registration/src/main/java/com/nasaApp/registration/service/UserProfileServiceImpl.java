@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import com.nasaApp.registration.dto.UserProfileDTO;
@@ -23,6 +24,9 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 	@Autowired
 	private UserProfileRepository userProfileRepository;
+
+	@Autowired
+	private KafkaTemplate<String, Object> kafkaTemplate;
 
 	@Override
 	public MessageResponse register(@Valid UserProfileDTO userProfileDto)
@@ -53,6 +57,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 		userProfile.setContactNumber(userProfileDto.getContactNumber());
 		userProfileRepository.save(userProfile);
 
+		kafkaTemplate.send("registration-topic", userProfileDto);
 		return new MessageResponse("User Registered Successfully!", HttpStatus.OK);
 	}
 

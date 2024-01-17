@@ -6,11 +6,6 @@ import com.nasaApp.login.responses.SuccessResponse;
 
 public interface AuthService {
 
-	// public SuccessResponse login(Authentication authentication) throws
-	// LoginException;
-
-//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
-
 	SuccessResponse authenticateUser(Authentication authentication) throws LoginException;
 
 }

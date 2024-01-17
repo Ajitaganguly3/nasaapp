@@ -1,5 +1,8 @@
-package com.nasaapp.apod.entity;
+package com.nasaapp.wishlist.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Apod {
 
 	private String copyright;

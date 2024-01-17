@@ -1,16 +1,11 @@
 package com.nasaapp.apod.service;
 
-import java.util.List;
-import java.util.Map;
+import com.nasaapp.apod.entity.Apod;
 
 public interface ApodService {
 
-//	public Apod getPictureOfTheDay();
-//
-//	public Apod getPictureByDate(String date);
+	Apod getApods();
 
-	public List<Map<String, Object>> getApods();
-
-	Map<String, Object> getApodByDate(String id);
+	Apod getApodByDate(String date);
 
 }

@@ -1,16 +1,21 @@
 package com.nasaapp.apod.controller;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nasaapp.apod.entity.Apod;
 import com.nasaapp.apod.service.ApodService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/apod")
@@ -21,22 +26,25 @@ public class ApodController {
 	@Autowired
 	private ApodService apodService;
 
+	@Operation(summary = "To List the details of APOD")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Third Party API working correctly", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Apod.class))),
+			@ApiResponse(responseCode = "400", description = "Check the URL", content = @Content) })
+
 	@GetMapping("/getApods")
 	public ResponseEntity<?> getApods() {
-		List<Map<String, Object>> dataList = apodService.getApods();
+		Apod dataList = apodService.getApods();
 		return new ResponseEntity<>(dataList, HttpStatus.OK);
 	}
 
-//	@GetMapping("/apod")
-//	public ResponseEntity<Apod> getPictureOfTheDay() {
-//		Apod apod = apodService.getPictureOfTheDay();
-//		log.info("Recieved request for picture of the day");
-//		return new ResponseEntity<>(apod, HttpStatus.OK);
-//	}
-//
-	@GetMapping("/apodByDate")
-	public Map<String, Object> getPictureByDate(String Date) {
-		return apodService.getApodByDate(Date);
+	@Operation(summary = "To List the details of APOD by Date")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Third Party API working correctly", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Apod.class))),
+			@ApiResponse(responseCode = "400", description = "Check the URL", content = @Content) })
+
+	@GetMapping("/apodByDate/{date}")
+	public Apod getPictureByDate(@PathVariable String date) {
+		return apodService.getApodByDate(date);
 
 	}
 

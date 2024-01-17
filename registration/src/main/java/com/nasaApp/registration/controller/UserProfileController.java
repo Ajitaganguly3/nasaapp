@@ -51,6 +51,11 @@ public class UserProfileController {
 
 	}
 
+	@Operation(summary = "To view username and password of the registered user")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Credentials viewed successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = MessageResponse.class))),
+			@ApiResponse(responseCode = "400", description = "Username doesn't exist", content = @Content) })
+
 	@GetMapping("credentials/{username}")
 	public ResponseEntity<UserCredentialsResponse> getUserInfo(@PathVariable String username)
 			throws UserNotFoundException {
