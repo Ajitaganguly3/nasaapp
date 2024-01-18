@@ -8,4 +8,6 @@ public interface AuthService {
 
 	SuccessResponse authenticateUser(Authentication authentication) throws LoginException;
 
+	Authentication getUserInfo(String username);
+
 }

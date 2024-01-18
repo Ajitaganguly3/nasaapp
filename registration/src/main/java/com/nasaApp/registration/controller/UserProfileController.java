@@ -1,5 +1,7 @@
 package com.nasaApp.registration.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +31,8 @@ public class UserProfileController {
 
 	UserProfileService userProfileService;
 
+	private Logger logger = LoggerFactory.getLogger(UserProfileController.class);
+
 	@Autowired
 	public UserProfileController(UserProfileService userProfileService) {
 		this.userProfileService = userProfileService;
@@ -44,7 +48,9 @@ public class UserProfileController {
 			throws InvalidPasswordException, UsernameAlreadyExistException {
 		MessageResponse messageResponse = userProfileService.register(userProfileDTO);
 		if (messageResponse != null) {
+			logger.info("Registration successful");
 			return ResponseEntity.ok(messageResponse);
+
 		} else {
 			return ResponseEntity.notFound().build();
 		}
@@ -61,6 +67,7 @@ public class UserProfileController {
 			throws UserNotFoundException {
 		UserCredentialsResponse credentials = userProfileService.getUserInfo(username);
 		if (credentials != null) {
+			logger.info("User details shown");
 			return ResponseEntity.ok(credentials);
 		} else {
 			return ResponseEntity.notFound().build();

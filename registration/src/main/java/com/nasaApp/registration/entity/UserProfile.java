@@ -3,6 +3,9 @@ package com.nasaApp.registration.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.Builder;
+
+@Builder
 @Document(collection = "userprofile")
 public class UserProfile {
 

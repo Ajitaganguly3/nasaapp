@@ -2,6 +2,9 @@ package com.nasaApp.login.entity;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.Builder;
+
+@Builder
 @Document
 public class Authentication {
 
