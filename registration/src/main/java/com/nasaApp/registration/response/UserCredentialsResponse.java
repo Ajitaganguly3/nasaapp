@@ -20,4 +20,14 @@ public class UserCredentialsResponse {
 		this.password = password;
 	}
 
+	public UserCredentialsResponse(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
+	public UserCredentialsResponse() {
+		// TODO Auto-generated constructor stub
+	}
+
 }

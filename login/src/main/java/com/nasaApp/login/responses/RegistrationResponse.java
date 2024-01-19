@@ -5,10 +5,6 @@ public class RegistrationResponse {
 	private String username;
 	private String password;
 
-	public RegistrationResponse() {
-
-	}
-
 	public RegistrationResponse(String username, String password) {
 		super();
 		this.username = username;

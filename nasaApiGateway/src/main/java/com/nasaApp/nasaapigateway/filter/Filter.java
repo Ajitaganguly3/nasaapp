@@ -1,5 +1,7 @@
 package com.nasaApp.nasaapigateway.filter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -21,7 +23,9 @@ import reactor.core.publisher.Mono;
 public class Filter implements GatewayFilter {
 	@Value("${jwt.secret.key}")
 	private String secretKey;
-
+	
+	Logger logger = LoggerFactory.getLogger(Filter.class);
+	
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 		// TODO Auto-generated method stub
@@ -42,8 +46,11 @@ public class Filter implements GatewayFilter {
 			return onError(response, "Invalid Authorization header", HttpStatus.UNAUTHORIZED);
 		}
 		Claims claims = null;
+		logger.info(token);
 		try {
 			claims = getClaims(token);
+			logger.info("claims");
+			
 			String username = claims.getSubject(); // this will return you the current username (emailid)
 			request.mutate().header("username", username).header("Authorization", token);
 			// current logged in user
@@ -51,6 +58,7 @@ public class Filter implements GatewayFilter {
 		} catch (Exception e) {
 			response.setStatusCode(HttpStatus.UNAUTHORIZED);
 			// System.out.println("Does not contain Valid token");
+			logger.info("token");
 			return onError(response, "Invalid token", HttpStatus.UNAUTHORIZED);
 		}
 		return chain.filter(exchange);

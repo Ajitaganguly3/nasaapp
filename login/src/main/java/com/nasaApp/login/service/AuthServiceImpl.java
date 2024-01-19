@@ -34,7 +34,8 @@ public class AuthServiceImpl implements AuthService {
 		RegistrationResponse registrationResponse = restTemplate.getForObject(
 				"http://localhost:8083/user/credentials/" + authentication.getUsername(), RegistrationResponse.class,
 				authentication);
-
+		logger.info(registrationResponse.getUsername());
+		logger.info(registrationResponse.getPassword());
 		// Validating password and generating JWT token
 		if (registrationResponse != null && registrationResponse.getPassword().equals(authentication.getPassword())) {
 			String token = jwtUtil.generateToken(registrationResponse.getUsername());

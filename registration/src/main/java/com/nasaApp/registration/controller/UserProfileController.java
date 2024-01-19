@@ -55,7 +55,7 @@ public class UserProfileController {
 			return ResponseEntity.notFound().build();
 		}
 
-	}
+	}	
 
 	@Operation(summary = "To view username and password of the registered user")
 	@ApiResponses(value = {

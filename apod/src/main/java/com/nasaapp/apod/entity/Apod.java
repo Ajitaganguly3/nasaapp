@@ -1,5 +1,8 @@
 package com.nasaapp.apod.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "apods")
 public class Apod {
 
 	private String copyright;
@@ -72,6 +75,23 @@ public class Apod {
 	}
 
 	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Apod() {
+
+	}
+
+	public Apod(String copyright, String title, String date, String explanation, String hdurl, String media_type,
+			String service_version, String url) {
+		super();
+		this.copyright = copyright;
+		this.title = title;
+		this.date = date;
+		this.explanation = explanation;
+		this.hdurl = hdurl;
+		this.media_type = media_type;
+		this.service_version = service_version;
 		this.url = url;
 	}
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.nasaapp.apod.entity.Apod;
+import com.nasaapp.apod.repository.ApodRepository;
 
 @Service
 public class ApodServiceImpl implements ApodService {
@@ -19,11 +20,20 @@ public class ApodServiceImpl implements ApodService {
 	@Autowired
 	private RestTemplate restTemplate;
 
+	@Autowired
+	private ApodRepository apodRepository;
+
 	String baseUrl = "https://api.nasa.gov/planetary/";
 
 	StringBuilder stringBuilder = new StringBuilder(baseUrl);
-	String apiUrl = "/apod?api_key=5SjXN0KlUvLdGePPjV3jwS452DePfleVFWP15mKy";
+	String apiUrl = "/apod?api_key=zhjoGExY6FeyM8buMcsnGj2fazcyfBeOzeH4dLBZ";
 	String dateUrl = apiUrl + "&date=";
+
+	public ApodServiceImpl(RestTemplate restTemplate, ApodRepository apodRepository) {
+		// TODO Auto-generated constructor stub
+		this.restTemplate = restTemplate;
+		this.apodRepository = apodRepository;
+	}
 
 	@Override
 	public Apod getApods() {
@@ -32,6 +42,8 @@ public class ApodServiceImpl implements ApodService {
 
 		ResponseEntity<Apod> responseEntity = restTemplate.exchange(fullUrl, HttpMethod.GET,
 				new HttpEntity<>(gethttpHeaders()), Apod.class);
+
+		apodRepository.save(responseEntity.getBody());
 
 		return responseEntity.getBody();
 

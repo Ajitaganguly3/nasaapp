@@ -1,9 +1,22 @@
-package com.nasaapp.wishlist.entity;
+package com.nasaapp.wishlist.dto;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.io.Serializable;
 
-@Document
-public class Apod {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class ApodDTO implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2070387535953331853L;
 
 	private String copyright;
 	private String title;
@@ -13,6 +26,30 @@ public class Apod {
 	private String media_type;
 	private String service_version;
 	private String url;
+
+	public ApodDTO(String url, String title, String date) {
+		// TODO Auto-generated constructor stub
+		this.url = url;
+		this.title = title;
+		this.date = date;
+	}
+
+	public ApodDTO() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public ApodDTO(String copyright, String title, String date, String explanation, String hdurl, String media_type,
+			String service_version, String url) {
+		// TODO Auto-generated constructor stub
+		this.copyright = copyright;
+		this.title = title;
+		this.date = date;
+		this.explanation = explanation;
+		this.hdurl = hdurl;
+		this.media_type = media_type;
+		this.service_version = service_version;
+		this.url = url;
+	}
 
 	public String getCopyright() {
 		return copyright;

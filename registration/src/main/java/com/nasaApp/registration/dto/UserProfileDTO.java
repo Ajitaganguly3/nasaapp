@@ -23,6 +23,18 @@ public class UserProfileDTO {
 	@Min(value = 8, message = "Password should be of length 8 atleast")
 	private String confirmPassword;
 
+	public UserProfileDTO(String firstName, String lastName, String email, String username, String contactNumber,
+			String password, String confirmPassword) {
+		// TODO Auto-generated constructor stub
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.username = username;
+		this.contactNumber = contactNumber;
+		this.password = password;
+		this.confirmPassword = confirmPassword;
+	}
+
 	public String getId() {
 		return id;
 	}

@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Builder;
 
 @Builder
-@Document
+@Document(collection = "authDetails")
 public class Authentication {
 
 	private String username;

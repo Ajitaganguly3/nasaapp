@@ -1,62 +1,73 @@
 package com.nasaapp.wishlist.service;
 
-import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import com.nasaapp.wishlist.entity.Apod;
+import com.nasaapp.wishlist.dto.ApodDTO;
+import com.nasaapp.wishlist.entity.Wishlist;
+import com.nasaapp.wishlist.exceptions.ImageAlreadyExistsException;
+import com.nasaapp.wishlist.exceptions.ImageDoesNotExistException;
+import com.nasaapp.wishlist.exceptions.WishlistEmptyException;
 import com.nasaapp.wishlist.repository.WishlistRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class WishlistServiceImpl implements WishlistService {
 
 	@Autowired
-	RestTemplate restTemplate;
+	private WishlistRepository wishlistRepository;
 
-	@Autowired
-	WishlistRepository wishlistRepository;
-
-	String baseUrl = "https://api.nasa.gov/planetary/";
-
-	StringBuilder stringBuilder = new StringBuilder(baseUrl);
-	String apiUrl = "/apod?api_key=5SjXN0KlUvLdGePPjV3jwS452DePfleVFWP15mKy";
-	String dateUrl = apiUrl + "&date=";
+	public WishlistServiceImpl(WishlistRepository wishlistRepository) {
+		// TODO Auto-generated constructor stub
+		this.wishlistRepository = wishlistRepository;
+	}
 
 	@Override
-	public void addToWishlist(String date) {
+//	@Cacheable(cacheNames = "apodList", key = "'allItems'")
+	public List<Wishlist> getAllItems() throws WishlistEmptyException {
 		// TODO Auto-generated method stub
-		String url = baseUrl + dateUrl + date;
+		List<Wishlist> items = wishlistRepository.findAll();
 
-		try {
-			// Make a request to the NASA API
-			ResponseEntity<Apod> responseEntity = restTemplate.exchange(url, HttpMethod.GET,
-					new HttpEntity<>(gethttpHeaders()), Apod.class);
-			Apod apod = responseEntity.getBody();
-			String imageUrl = apod.getUrl();
-			String title = apod.getTitle();
-			Apod wishlistItem = new Apod();
-			wishlistItem.setTitle(title);
-			wishlistItem.setHdurl(imageUrl);
-			wishlistRepository.save(wishlistItem);
-		} catch (Exception e) {
-			// Handle exceptions, log, or return an error response as needed
-			e.printStackTrace();
+		if (items.isEmpty()) {
+			throw new WishlistEmptyException("Wishlist is empty");
 		}
+
+		return items;
+	}
+
+	@Override
+//	@CacheEvict(cacheNames = "apodList", allEntries = true)
+	public void addToWishlist(ApodDTO apodDTO) throws ImageAlreadyExistsException {
+		// TODO Auto-generated method stub
+		String url = apodDTO.getUrl();
+		if (wishlistRepository.existsByUrl(url)) {
+			throw new ImageAlreadyExistsException("URL already exists in the wishlist.");
+		}
+
+		Wishlist wishlist = new Wishlist();
+
+		wishlist.setUrl(url);
+		wishlist.setTitle(apodDTO.getTitle());
+		wishlist.setDate(apodDTO.getDate());
+
+		wishlistRepository.save(wishlist);
 
 	}
 
-	private HttpHeaders gethttpHeaders() {
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		return headers;
+	@Override
+//	@CacheEvict(cacheNames = "apodList", allEntries = true)
+	public void deleteFromWishlist(ApodDTO apodDTO) throws ImageDoesNotExistException {
+		// TODO Auto-generated method stub
+		String url = apodDTO.getUrl();
+		if (wishlistRepository.existsByUrl(url)) {
+			wishlistRepository.deleteByUrl(url);
+		} else {
+			throw new ImageDoesNotExistException("Image does not exist in the wishlist");
+		}
 	}
 
 }
