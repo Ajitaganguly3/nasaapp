@@ -2,6 +2,8 @@ package com.nasaapp.apod.service;
 
 import java.util.Arrays;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -21,6 +23,10 @@ public class ApodServiceImpl implements ApodService {
 	@Autowired
 	private RestTemplate restTemplate;
 
+	private final Logger logger = LoggerFactory.getLogger(ApodServiceImpl.class);
+
+	private String lastReceivedMessage;
+
 	String baseUrl = "https://api.nasa.gov/planetary/";
 
 	StringBuilder stringBuilder = new StringBuilder(baseUrl);
@@ -36,10 +42,14 @@ public class ApodServiceImpl implements ApodService {
 	@Override
 	public Apod getApods() {
 
+		System.out.println("Calling getApods method");
 		String fullUrl = baseUrl + apiUrl;
 
 		ResponseEntity<Apod> responseEntity = restTemplate.exchange(fullUrl, HttpMethod.GET,
 				new HttpEntity<>(gethttpHeaders()), Apod.class);
+
+		HttpHeaders headers = gethttpHeaders();
+		System.out.println("Received headers: " + headers);
 
 		return responseEntity.getBody();
 
@@ -53,6 +63,8 @@ public class ApodServiceImpl implements ApodService {
 		ResponseEntity<Apod> responseEntity = restTemplate.exchange(fullUrl, HttpMethod.GET,
 				new HttpEntity<>(gethttpHeaders()), Apod.class);
 
+		HttpHeaders headers = gethttpHeaders();
+		System.out.println("Received headers: " + headers);
 		return responseEntity.getBody();
 	}
 
@@ -60,12 +72,41 @@ public class ApodServiceImpl implements ApodService {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		headers.setContentType(MediaType.APPLICATION_JSON);
+
+		String token = getJWTTokenfromKafka();
+		logger.info(token);
+		System.out.println(token);
+		headers.set("Authorization", token);
 		return headers;
 	}
 
 	@KafkaListener(topics = AppConstants.NASAAPP_LOGIN_TOPIC_NAME, groupId = AppConstants.GROUP_ID)
 	public void consumeLoginMessage(String message) {
 		System.out.println("Received login message: " + message);
+		lastReceivedMessage = message;
+		System.out.println(lastReceivedMessage);
+		System.out.println("Calling jwttoken method from consumer method: ");
+		getJWTTokenfromKafka();
+
+	}
+
+	private String getJWTTokenfromKafka() {
+
+		String prefix = "and the token generated is: ";
+		int startIndex = lastReceivedMessage.indexOf(prefix);
+		System.out.println(lastReceivedMessage);
+
+		if (startIndex != -1) {
+			String token = lastReceivedMessage.substring(startIndex + prefix.length()).trim();
+			int endIndex = token.indexOf("\"");
+			if (endIndex != -1) {
+				token = token.substring(0, endIndex);
+			}
+
+			return token;
+		} else {
+			return "";
+		}
 	}
 
 }

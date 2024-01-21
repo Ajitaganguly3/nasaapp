@@ -35,7 +35,7 @@ public class CorsConfiguration {
 																// (that is the information contained in the
 																// Access-Control-Allow-Methods and
 																// Access-Control-Allow-Headers headers) can be cached.
-				headers.add("Access-Control-Allow-Headers", ALLOWED_HEADERS);
+				headers.add("Access-Control-Allow-Headers", ALLOWED_HEADERS + "Authorization");
 				if (request.getMethod() == HttpMethod.OPTIONS) {
 					response.setStatusCode(HttpStatus.OK);
 					return Mono.empty();

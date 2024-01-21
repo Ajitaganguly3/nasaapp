@@ -46,7 +46,8 @@ public class AuthServiceImpl implements AuthService {
 		if (registrationResponse != null && registrationResponse.getPassword().equals(authentication.getPassword())) {
 			String token = jwtUtil.generateToken(registrationResponse.getUsername());
 			authRepository.save(authentication);
-			String message = "Login successful for user: " + authentication.getUsername();
+			String message = "Login successful for user: " + authentication.getUsername()
+					+ " and the token generated is: " + token;
 			kafkaTemplate.send(AppConstants.NASAAPP_LOGIN_TOPIC_NAME, message);
 
 			return new SuccessResponse("Login Successful!", authentication.getUsername(), token);

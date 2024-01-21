@@ -46,7 +46,7 @@ public class Filter implements GatewayFilter {
 			return onError(response, "Invalid Authorization header", HttpStatus.UNAUTHORIZED);
 		}
 		Claims claims = null;
-		logger.info(token);
+		logger.info("token: ",token);
 		try {
 			claims = getClaims(token);
 			logger.info("claims");
@@ -72,13 +72,17 @@ public class Filter implements GatewayFilter {
 
 	private Claims getClaims(String jwtToken) throws ServletException {
 		try {
+			logger.info("jwttoken: ",jwtToken);
 			return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken).getBody();
 
 		} catch (MalformedJwtException me) {
+			logger.info("malformed jwtexception in claims");
 			throw new ServletException("Token has been modified by unauthorized user");
 		} catch (ExpiredJwtException ee) {
+			logger.info("expired jwt exception in claims");
 			throw new ServletException("Token expired");
 		} catch (IllegalArgumentException le) {
+			logger.info("Illegal argument exception in claims");
 			throw new ServletException("Check and relogin");
 		}
 
