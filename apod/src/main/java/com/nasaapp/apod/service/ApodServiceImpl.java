@@ -8,9 +8,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.nasaapp.apod.config.AppConstants;
 import com.nasaapp.apod.entity.Apod;
 import com.nasaapp.apod.repository.ApodRepository;
 
@@ -65,6 +67,11 @@ public class ApodServiceImpl implements ApodService {
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		return headers;
+	}
+
+	@KafkaListener(topics = AppConstants.NASAAPP_LOGIN_TOPIC_NAME, groupId = AppConstants.GROUP_ID)
+	public void consumeLoginMessage(String message) {
+		System.out.println("Received login message: " + message);
 	}
 
 }

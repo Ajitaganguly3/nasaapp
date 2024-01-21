@@ -3,9 +3,12 @@ package com.nasaApp.login.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.nasaApp.login.config.AppConstants;
 import com.nasaApp.login.entity.Authentication;
 import com.nasaApp.login.exceptions.LoginException;
 import com.nasaApp.login.repository.AuthRepository;
@@ -25,6 +28,9 @@ public class AuthServiceImpl implements AuthService {
 	@Autowired
 	private RestTemplate restTemplate;
 
+	@Autowired
+	private KafkaTemplate<String, Object> kafkaTemplate;
+
 	private Logger logger = LoggerFactory.getLogger(AuthService.class);
 
 	@Override
@@ -40,6 +46,9 @@ public class AuthServiceImpl implements AuthService {
 		if (registrationResponse != null && registrationResponse.getPassword().equals(authentication.getPassword())) {
 			String token = jwtUtil.generateToken(registrationResponse.getUsername());
 			authRepository.save(authentication);
+			String message = "Login successful for user: " + authentication.getUsername();
+			kafkaTemplate.send(AppConstants.NASAAPP_LOGIN_TOPIC_NAME, message);
+
 			return new SuccessResponse("Login Successful!", authentication.getUsername(), token);
 		} else {
 			// Handling invalid credentials
@@ -57,6 +66,11 @@ public class AuthServiceImpl implements AuthService {
 
 		return user;
 
+	}
+
+	@KafkaListener(topics = AppConstants.NASAAPP_REGISTRATION_TOPIC_NAME, groupId = AppConstants.GROUP_ID)
+	public void consumeRegistrationMessage(String message) {
+		System.out.println("Received registation message: " + message);
 	}
 
 }

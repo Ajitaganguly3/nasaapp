@@ -4,8 +4,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import com.nasaApp.registration.config.AppConstants;
 import com.nasaApp.registration.dto.UserProfileDTO;
 import com.nasaApp.registration.entity.UserProfile;
 import com.nasaApp.registration.exceptions.InvalidPasswordException;
@@ -23,13 +25,12 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 	private final UserProfileRepository userProfileRepository;
 
-	@Autowired
 	public UserProfileServiceImpl(UserProfileRepository userProfileRepository) {
 		this.userProfileRepository = userProfileRepository;
 	}
 
-//	@Autowired
-//	private KafkaTemplate<String, Object> kafkaTemplate;
+	@Autowired
+	private KafkaTemplate<String, Object> kafkaTemplate;
 
 	@Override
 	public MessageResponse register(@Valid UserProfileDTO userProfileDto)
@@ -60,7 +61,8 @@ public class UserProfileServiceImpl implements UserProfileService {
 		userProfile.setContactNumber(userProfileDto.getContactNumber());
 		userProfileRepository.save(userProfile);
 
-//		kafkaTemplate.send("registration-topic", userProfileDto);
+		String message = "Registration successful for user: " + userProfile.getUsername();
+		kafkaTemplate.send(AppConstants.NASAAPP_REGISTRATION_TOPIC_NAME, message);
 		return new MessageResponse("User Registered Successfully!", HttpStatus.OK);
 	}
 
