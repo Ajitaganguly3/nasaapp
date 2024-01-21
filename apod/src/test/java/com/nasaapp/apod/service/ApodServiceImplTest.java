@@ -16,19 +16,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.nasaapp.apod.entity.Apod;
-import com.nasaapp.apod.repository.ApodRepository;
 
 public class ApodServiceImplTest {
 
 	private ApodServiceImpl apodService;
 	private RestTemplate restTemplateMock;
-	private ApodRepository apodRepositoryMock;
+	// private ApodRepository apodRepositoryMock;
 
 	@BeforeEach
 	void setUp() {
 		restTemplateMock = mock(RestTemplate.class);
-		apodRepositoryMock = mock(ApodRepository.class);
-		apodService = new ApodServiceImpl(restTemplateMock, apodRepositoryMock);
+		// apodRepositoryMock = mock(ApodRepository.class);
+		apodService = new ApodServiceImpl(restTemplateMock);
 	}
 
 	@Test
@@ -41,7 +40,7 @@ public class ApodServiceImplTest {
 				new HttpEntity<>(getHttpHeaders()), Apod.class)).thenReturn(mockResponseEntity);
 
 		// Mocking repository save
-		when(apodRepositoryMock.save(mockApod)).thenReturn(mockApod);
+		// when(apodRepositoryMock.save(mockApod)).thenReturn(mockApod);
 
 		Apod result = apodService.getApods();
 

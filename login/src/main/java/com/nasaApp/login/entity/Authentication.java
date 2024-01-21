@@ -1,13 +1,14 @@
 package com.nasaApp.login.entity;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.Builder;
 
 @Builder
-@Document(collection = "authDetails")
+@Entity
 public class Authentication {
 
+	@Id
 	private String username;
 	private String password;
 

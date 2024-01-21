@@ -1,8 +1,5 @@
 package com.nasaapp.apod.entity;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "apods")
 public class Apod {
 
 	private String copyright;
