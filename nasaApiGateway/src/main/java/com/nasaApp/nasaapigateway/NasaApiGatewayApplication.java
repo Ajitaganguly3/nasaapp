@@ -27,7 +27,7 @@ public class NasaApiGatewayApplication {
 		return builder.routes()
 
 				.route("apod-service",
-						route -> route.path("/apod/**").filters(f -> f.filter(apiFilter).addRequestHeader("Authorization", "{token}")).uri("lb://APOD-SERVICE"))
+						route -> route.path("/apod/**").filters(f -> f.filter(apiFilter)).uri("lb://APOD-SERVICE"))
 				.route("wishlist-service",
 						route -> route.path("/wishlist/**").filters(f -> f.filter(apiFilter))
 								.uri("lb://WISHLIST-SERVICE"))

@@ -21,11 +21,12 @@ import reactor.core.publisher.Mono;
 
 @Component
 public class Filter implements GatewayFilter {
+
 	@Value("${jwt.secret.key}")
 	private String secretKey;
-	
+
 	Logger logger = LoggerFactory.getLogger(Filter.class);
-	
+
 	@Override
 	public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
 		// TODO Auto-generated method stub
@@ -45,12 +46,13 @@ public class Filter implements GatewayFilter {
 			// System.out.println("Does not contain Bearer");
 			return onError(response, "Invalid Authorization header", HttpStatus.UNAUTHORIZED);
 		}
+
 		Claims claims = null;
-		logger.info("token: ",token);
+		logger.info("token: {}", token);
 		try {
 			claims = getClaims(token);
 			logger.info("claims");
-			
+
 			String username = claims.getSubject(); // this will return you the current username (emailid)
 			request.mutate().header("username", username).header("Authorization", token);
 			// current logged in user
@@ -58,6 +60,7 @@ public class Filter implements GatewayFilter {
 		} catch (Exception e) {
 			response.setStatusCode(HttpStatus.UNAUTHORIZED);
 			// System.out.println("Does not contain Valid token");
+			logger.error("Error obtaining claims: {}", e.getMessage());
 			logger.info("token");
 			return onError(response, "Invalid token", HttpStatus.UNAUTHORIZED);
 		}
@@ -72,7 +75,12 @@ public class Filter implements GatewayFilter {
 
 	private Claims getClaims(String jwtToken) throws ServletException {
 		try {
-			logger.info("jwttoken: ",jwtToken);
+			logger.info("jwttoken: {}", jwtToken);
+			// Jws<Claims> claimJws =
+			// Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
+			// logger.info("claimsJWS: ", claimJws.getBody());
+			// Claims claim = claimJws.getBody();
+			System.out.println(secretKey);
 			return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken).getBody();
 
 		} catch (MalformedJwtException me) {
