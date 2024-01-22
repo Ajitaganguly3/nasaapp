@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,14 +57,16 @@ public class WishlistController {
 			@ApiResponse(responseCode = "200", description = "All the details retrived successfully", content = @Content(mediaType = "application/json", schema = @Schema(implementation = Wishlist.class))),
 			@ApiResponse(responseCode = "400", description = "check the content", content = @Content) })
 
-	@GetMapping("/all")
-	public ResponseEntity<?> getAllItems() throws WishlistEmptyException {
+	@GetMapping("/all/{username}")
+	public ResponseEntity<List<WishlistDTO>> getAllItems(@PathVariable String username) throws WishlistEmptyException {
 		try {
-			List<Wishlist> items = wishlistService.getAllItems();
-			return ResponseEntity.ok(items);
+			List<WishlistDTO> wishlistItems = wishlistService.getAllItems(username);
+			return new ResponseEntity<>(wishlistItems, HttpStatus.OK);
+
 		} catch (WishlistEmptyException e) {
 			// TODO: handle exception
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
 		}
 	}
 
@@ -73,7 +76,8 @@ public class WishlistController {
 			@ApiResponse(responseCode = "404", description = "Image does not exist in the wishlist", content = @Content) })
 
 	@DeleteMapping("/delete")
-	public ResponseEntity<String> deleteFromWishlist(@RequestBody WishlistDTO apodDTO) throws ImageDoesNotExistException {
+	public ResponseEntity<String> deleteFromWishlist(@RequestBody WishlistDTO apodDTO)
+			throws ImageDoesNotExistException {
 		try {
 			wishlistService.deleteFromWishlist(apodDTO);
 			return ResponseEntity.ok("Deleted from wishlist successfully.");

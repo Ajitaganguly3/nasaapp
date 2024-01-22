@@ -17,4 +17,11 @@ public class WishlistId implements Serializable {
 	private String date;
 	private String url;
 
+	public WishlistId(String title, String date, String url) {
+		// TODO Auto-generated constructor stub
+		this.title = title;
+		this.date = date;
+		this.url = url;
+	}
+
 }
