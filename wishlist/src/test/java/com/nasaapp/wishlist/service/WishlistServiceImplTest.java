@@ -120,8 +120,8 @@ public class WishlistServiceImplTest {
 
 	@Test
 	public void testDeleteFromWishlist_ImageDoesNotExistException() {
-		WishlistDTO wishlistDTO = new WishlistDTO("copyright1", "title1", "2024-01-21", "explanation1", "hdurl",
-				"media_type", "service_version", "url1", "ajita1");
+		WishlistDTO wishlistDTO = new WishlistDTO("copyright1", "ajita", "2024-01-21", "explanation1", "hdurl",
+				"media_type", "service_version", "url1", "ajita");
 		WishlistId wishlistId = new WishlistId(wishlistDTO.getUsername(), wishlistDTO.getDate(), wishlistDTO.getUrl());
 
 		Mockito.when(wishlistRepository.existsById(Mockito.any())).thenReturn(false);

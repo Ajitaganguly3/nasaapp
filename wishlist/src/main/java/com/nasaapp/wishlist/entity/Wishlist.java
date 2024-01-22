@@ -1,31 +1,30 @@
 package com.nasaapp.wishlist.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "wishlist")
 @IdClass(WishlistId.class)
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+
 public class Wishlist {
 
-	private String copyright;
-	private String title;
+	@Id
 	private String date;
+	@Id
+	private String url;
+	@Id
+	private String username;
 	private String explanation;
 	private String hdurl;
 	private String media_type;
+	private String copyright;
+	private String title;
 	private String service_version;
-	private String url;
-	private String username;
 
 	public String getUsername() {
 		return username;

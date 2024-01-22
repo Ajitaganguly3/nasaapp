@@ -57,8 +57,8 @@ public class WishlistServiceImpl implements WishlistService {
 
 		Wishlist wishlist = new Wishlist();
 
-		wishlist.setUrl(wishlist.getUrl());
-		wishlist.setTitle(wishlist.getTitle());
+		wishlist.setUrl(wishlistDTO.getUrl());
+		wishlist.setTitle(wishlistDTO.getTitle());
 		wishlist.setDate(wishlistDTO.getDate());
 		wishlist.setCopyright(wishlistDTO.getCopyright());
 		wishlist.setExplanation(wishlistDTO.getExplanation());
@@ -75,7 +75,7 @@ public class WishlistServiceImpl implements WishlistService {
 	@CacheEvict(cacheNames = "wishList", allEntries = true)
 	public void deleteFromWishlist(WishlistDTO wishlistDTO) throws ImageDoesNotExistException {
 		// TODO Auto-generated method stub
-		WishlistId wishlistId = new WishlistId(wishlistDTO.getTitle(), wishlistDTO.getDate(), wishlistDTO.getUrl());
+		WishlistId wishlistId = new WishlistId(wishlistDTO.getUsername(), wishlistDTO.getDate(), wishlistDTO.getUrl());
 
 		if (!wishlistRepository.existsById(wishlistId)) {
 			throw new ImageDoesNotExistException("Image with ID " + wishlistId + " does not exist in the wishlist.");
