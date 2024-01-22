@@ -13,13 +13,13 @@ public class WishlistId implements Serializable {
 
 	private static final long serialVersionUID = 8242309617655575798L;
 
-	private String title;
+	private String username;
 	private String date;
 	private String url;
 
-	public WishlistId(String title, String date, String url) {
+	public WishlistId(String username, String date, String url) {
 		// TODO Auto-generated constructor stub
-		this.title = title;
+		this.username = username;
 		this.date = date;
 		this.url = url;
 	}

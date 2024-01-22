@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.nasaapp.wishlist.dto.WishlistDTO;
@@ -29,7 +31,7 @@ public class WishlistServiceImpl implements WishlistService {
 	}
 
 	@Override
-//	@Cacheable(cacheNames = "apodList", key = "'allItems'")
+	@Cacheable(cacheNames = "wishList", key = "#username")
 	public List<WishlistDTO> getAllItems(String username) throws WishlistEmptyException {
 		// TODO Auto-generated method stub
 
@@ -44,13 +46,13 @@ public class WishlistServiceImpl implements WishlistService {
 	}
 
 	@Override
-//	@CacheEvict(cacheNames = "apodList", allEntries = true)
+	@CacheEvict(cacheNames = "wishList", allEntries = true)
 	public void addToWishlist(WishlistDTO wishlistDTO) throws ImageAlreadyExistsException {
 		// TODO Auto-generated method stub
-		WishlistId wishlistId = new WishlistId(wishlistDTO.getTitle(), wishlistDTO.getDate(), wishlistDTO.getUrl());
+		WishlistId wishlistId = new WishlistId(wishlistDTO.getUsername(), wishlistDTO.getDate(), wishlistDTO.getUrl());
 
 		if (wishlistRepository.existsById(wishlistId)) {
-			throw new ImageAlreadyExistsException("Image with ID " + wishlistId + " already exists in the wishlist.");
+			throw new ImageAlreadyExistsException("Image with Id: " + wishlistId + " already exists in the wishlist.");
 		}
 
 		Wishlist wishlist = new Wishlist();
@@ -70,7 +72,7 @@ public class WishlistServiceImpl implements WishlistService {
 	}
 
 	@Override
-//	@CacheEvict(cacheNames = "apodList", allEntries = true)
+	@CacheEvict(cacheNames = "wishList", allEntries = true)
 	public void deleteFromWishlist(WishlistDTO wishlistDTO) throws ImageDoesNotExistException {
 		// TODO Auto-generated method stub
 		WishlistId wishlistId = new WishlistId(wishlistDTO.getTitle(), wishlistDTO.getDate(), wishlistDTO.getUrl());

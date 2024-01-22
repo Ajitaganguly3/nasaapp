@@ -9,37 +9,40 @@ public class WishlistDTOTest {
 	@Test
 	void testGettersAndSetters() {
 
-		WishlistDTO apod = new WishlistDTO("Copyright", "Title", "2024-01-19", "Explanation", "HDURL", "MediaType",
-				"ServiceVersion", "URL");
+		WishlistDTO wishlistDTO = new WishlistDTO("copyright1", "title1", "2024-01-21", "explanation1", "hdurl",
+				"media_type", "service_version", "url1", "ajita1");
 
 		// Testing getters
-		assertEquals("Copyright", apod.getCopyright());
-		assertEquals("Title", apod.getTitle());
-		assertEquals("2024-01-19", apod.getDate());
-		assertEquals("Explanation", apod.getExplanation());
-		assertEquals("HDURL", apod.getHdurl());
-		assertEquals("MediaType", apod.getMedia_type());
-		assertEquals("ServiceVersion", apod.getService_version());
-		assertEquals("URL", apod.getUrl());
+		assertEquals("copyright1", wishlistDTO.getCopyright());
+		assertEquals("title1", wishlistDTO.getTitle());
+		assertEquals("2024-01-21", wishlistDTO.getDate());
+		assertEquals("explanation1", wishlistDTO.getExplanation());
+		assertEquals("hdurl", wishlistDTO.getHdurl());
+		assertEquals("media_type", wishlistDTO.getMedia_type());
+		assertEquals("service_version", wishlistDTO.getService_version());
+		assertEquals("url1", wishlistDTO.getUrl());
+		assertEquals("ajita1", wishlistDTO.getUsername());
 
 		// Testing setters
-		apod.setCopyright("New Copyright");
-		apod.setTitle("New Title");
-		apod.setDate("2024-01-20");
-		apod.setExplanation("New Explanation");
-		apod.setHdurl("New HDURL");
-		apod.setMedia_type("New MediaType");
-		apod.setService_version("New ServiceVersion");
-		apod.setUrl("New URL");
+		wishlistDTO.setCopyright("New Copyright");
+		wishlistDTO.setTitle("New Title");
+		wishlistDTO.setDate("2024-01-20");
+		wishlistDTO.setExplanation("New Explanation");
+		wishlistDTO.setHdurl("New HDURL");
+		wishlistDTO.setMedia_type("New MediaType");
+		wishlistDTO.setService_version("New ServiceVersion");
+		wishlistDTO.setUrl("New URL");
+		wishlistDTO.setUsername("ajita");
 
 		// Verifying changes
-		assertEquals("New Copyright", apod.getCopyright());
-		assertEquals("New Title", apod.getTitle());
-		assertEquals("2024-01-20", apod.getDate());
-		assertEquals("New Explanation", apod.getExplanation());
-		assertEquals("New HDURL", apod.getHdurl());
-		assertEquals("New MediaType", apod.getMedia_type());
-		assertEquals("New ServiceVersion", apod.getService_version());
-		assertEquals("New URL", apod.getUrl());
+		assertEquals("New Copyright", wishlistDTO.getCopyright());
+		assertEquals("New Title", wishlistDTO.getTitle());
+		assertEquals("2024-01-20", wishlistDTO.getDate());
+		assertEquals("New Explanation", wishlistDTO.getExplanation());
+		assertEquals("New HDURL", wishlistDTO.getHdurl());
+		assertEquals("New MediaType", wishlistDTO.getMedia_type());
+		assertEquals("New ServiceVersion", wishlistDTO.getService_version());
+		assertEquals("New URL", wishlistDTO.getUrl());
+		assertEquals("ajita", wishlistDTO.getUsername());
 	}
 }

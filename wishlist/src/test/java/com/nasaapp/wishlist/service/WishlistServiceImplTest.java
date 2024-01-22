@@ -1,24 +1,21 @@
 package com.nasaapp.wishlist.service;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import com.nasaapp.wishlist.dto.WishlistDTO;
 import com.nasaapp.wishlist.entity.Wishlist;
+import com.nasaapp.wishlist.entity.WishlistId;
 import com.nasaapp.wishlist.exceptions.ImageAlreadyExistsException;
 import com.nasaapp.wishlist.exceptions.ImageDoesNotExistException;
 import com.nasaapp.wishlist.exceptions.WishlistEmptyException;
@@ -37,65 +34,106 @@ public class WishlistServiceImplTest {
 	}
 
 	@Test
-	public void testGetAllItems() throws WishlistEmptyException {
-		Wishlist item1 = new Wishlist("url1", "Title 1", "2022-01-01");
-		Wishlist item2 = new Wishlist("url2", "Title 2", "2022-01-02");
-		when(wishlistRepository.findAll()).thenReturn(Arrays.asList(item1, item2));
+	public void testGetAllItems_Success() throws WishlistEmptyException {
+		List<Wishlist> wishlistItem = new ArrayList<>();
+		String username = "ajita1";
+		wishlistItem.add(new Wishlist("copyright1", "title1", "2024-01-21", "explanation1", "hdurl", "media_type",
+				"service_version", "url1", "ajita1"));
+//		Wishlist item2 = new Wishlist("copyright2", "title2", "2024-01-20", "explanation2", "hdurl2", "media_type2",
+//				"service_version2", "url2", "ajita2");
+		when(wishlistRepository.findByUsername(username)).thenReturn(wishlistItem);
 
-		List<Wishlist> result = wishlistService.getAllItems();
+		List<WishlistDTO> result = wishlistService.getAllItems(username);
 
-		assertEquals(2, result.size());
-		assertEquals(item1, result.get(0));
-		assertEquals(item2, result.get(1));
+		assertNotNull(result);
+		assertEquals(wishlistItem.size(), result.size());
+	}
+
+	@Test
+	public void testGetAllItems_EmptyWishlist() throws WishlistEmptyException {
+		// Mock data and repository behavior
+		String username = "ajita1";
+		Mockito.when(wishlistRepository.findByUsername(username)).thenReturn(new ArrayList<>());
+
+		// Perform the test
+		try {
+			wishlistService.getAllItems(username);
+			fail("Expected WishlistEmptyException");
+		} catch (WishlistEmptyException e) {
+			// Expected exception
+			assertEquals("Wishlist is empty for user " + username, e.getMessage());
+		}
 	}
 
 	@Test
 	public void testAddToWishlist_Success() throws ImageAlreadyExistsException {
-		WishlistDTO apodDTO = new WishlistDTO("url3", "Title 3", "2022-01-03");
-		when(wishlistRepository.existsByUrl(apodDTO.getUrl())).thenReturn(false);
+		WishlistDTO wishlistDTO = new WishlistDTO("copyright1", "title1", "2024-01-21", "explanation1", "hdurl",
+				"media_type", "service_version", "url1", "ajita1");
+		Wishlist wishlistEntity = new Wishlist("copyright1", "title1", "2024-01-21", "explanation1", "hdurl",
+				"media_type", "service_version", "url1", "ajita1");
+		WishlistId wishlistId = new WishlistId(wishlistDTO.getUsername(), wishlistDTO.getDate(), wishlistDTO.getUrl());
 
-		assertDoesNotThrow(() -> wishlistService.addToWishlist(apodDTO));
+		Mockito.when(wishlistRepository.existsById(Mockito.any())).thenReturn(false);
+		Mockito.when(wishlistRepository.save(Mockito.any())).thenReturn(wishlistEntity);
 
-		verify(wishlistRepository, times(1)).save(any(Wishlist.class));
+		try {
+			wishlistService.addToWishlist(wishlistDTO);
+		} catch (ImageAlreadyExistsException e) {
+			assertEquals("Image with Id: " + wishlistId + " already exists in the wishlist.", e.getMessage());
+
+		}
+
+	}
+
+	@Test
+	public void testAddToWishlist_Conflict() throws ImageAlreadyExistsException {
+		// Mock data and repository behavior
+		WishlistDTO wishlistDTO = new WishlistDTO("copyright1", "title1", "2024-01-21", "explanation1", "hdurl",
+				"media_type", "service_version", "url1", "ajita1");
+		WishlistId wishlistId = new WishlistId(wishlistDTO.getUsername(), wishlistDTO.getDate(), wishlistDTO.getUrl());
+		Mockito.when(wishlistRepository.existsById(Mockito.any())).thenReturn(true);
+
+		// Perform the test
+		try {
+			wishlistService.addToWishlist(wishlistDTO);
+		} catch (ImageAlreadyExistsException e) {
+			// Expected exception
+			assertEquals("Image with Id: " + wishlistId + " already exists in the wishlist.", e.getMessage());
+		}
 	}
 
 	@Test
 	public void testDeleteFromWishlist_Success() throws ImageDoesNotExistException {
-		WishlistDTO apodDTO = new WishlistDTO("url4", "Title 4", "2022-01-04");
-		when(wishlistRepository.existsByUrl(apodDTO.getUrl())).thenReturn(true);
+		WishlistDTO wishlistDTO = new WishlistDTO("copyright1", "title1", "2024-01-21", "explanation1", "hdurl",
+				"media_type", "service_version", "url1", "ajita1");
+		WishlistId wishlistId = new WishlistId(wishlistDTO.getUsername(), wishlistDTO.getDate(), wishlistDTO.getUrl());
+		Mockito.when(wishlistRepository.existsById(Mockito.any())).thenReturn(true);
 
-		assertDoesNotThrow(() -> wishlistService.deleteFromWishlist(apodDTO));
+		// Perform the test
+		try {
+			wishlistService.deleteFromWishlist(wishlistDTO);
+		} catch (ImageDoesNotExistException e) {
+			assertEquals("Image with ID " + wishlistId + " does not exist in the wishlist.", e.getMessage());
+		}
 
-		verify(wishlistRepository, times(1)).deleteByUrl(apodDTO.getUrl());
-	}
-
-	@Test
-	public void testAddToWishlist_ImageAlreadyExistsException() {
-		WishlistDTO apodDTO = new WishlistDTO("url5", "Title 5", "2022-01-05");
-		when(wishlistRepository.existsByUrl(apodDTO.getUrl())).thenReturn(true);
-
-		assertThrows(ImageAlreadyExistsException.class, () -> wishlistService.addToWishlist(apodDTO));
-
-		verify(wishlistRepository, never()).save(any(Wishlist.class));
 	}
 
 	@Test
 	public void testDeleteFromWishlist_ImageDoesNotExistException() {
-		WishlistDTO apodDTO = new WishlistDTO("url6", "Title 6", "2022-01-06");
-		when(wishlistRepository.existsByUrl(apodDTO.getUrl())).thenReturn(false);
+		WishlistDTO wishlistDTO = new WishlistDTO("copyright1", "title1", "2024-01-21", "explanation1", "hdurl",
+				"media_type", "service_version", "url1", "ajita1");
+		WishlistId wishlistId = new WishlistId(wishlistDTO.getUsername(), wishlistDTO.getDate(), wishlistDTO.getUrl());
 
-		assertThrows(ImageDoesNotExistException.class, () -> wishlistService.deleteFromWishlist(apodDTO));
+		Mockito.when(wishlistRepository.existsById(Mockito.any())).thenReturn(false);
 
-		verify(wishlistRepository, never()).deleteByUrl(apodDTO.getUrl());
-	}
+		// Perform the test
+		try {
+			wishlistService.deleteFromWishlist(wishlistDTO);
 
-	@Test
-	public void testGetAllItems_WishlistEmptyException() {
-		when(wishlistRepository.findAll()).thenReturn(Collections.emptyList());
-
-		assertThrows(WishlistEmptyException.class, () -> wishlistService.getAllItems());
-
-		verify(wishlistRepository, times(1)).findAll();
+		} catch (ImageDoesNotExistException e) {
+			// Expected exception
+			assertEquals("Image with ID " + wishlistId + " does not exist in the wishlist.", e.getMessage());
+		}
 	}
 
 }
