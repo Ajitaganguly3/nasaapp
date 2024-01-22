@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import com.nasaApp.login.entity.Authentication;
@@ -37,6 +38,9 @@ public class AuthServiceImplTest {
 
 	@Mock
 	private RestTemplate restTemplate;
+
+	@Mock
+	private KafkaTemplate<String, Object> kafkaTemplate;
 
 	@BeforeEach
 	void setUp() {

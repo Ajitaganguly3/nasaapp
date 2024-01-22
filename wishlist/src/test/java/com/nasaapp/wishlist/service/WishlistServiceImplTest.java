@@ -17,7 +17,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.nasaapp.wishlist.dto.ApodDTO;
+import com.nasaapp.wishlist.dto.WishlistDTO;
 import com.nasaapp.wishlist.entity.Wishlist;
 import com.nasaapp.wishlist.exceptions.ImageAlreadyExistsException;
 import com.nasaapp.wishlist.exceptions.ImageDoesNotExistException;
@@ -51,7 +51,7 @@ public class WishlistServiceImplTest {
 
 	@Test
 	public void testAddToWishlist_Success() throws ImageAlreadyExistsException {
-		ApodDTO apodDTO = new ApodDTO("url3", "Title 3", "2022-01-03");
+		WishlistDTO apodDTO = new WishlistDTO("url3", "Title 3", "2022-01-03");
 		when(wishlistRepository.existsByUrl(apodDTO.getUrl())).thenReturn(false);
 
 		assertDoesNotThrow(() -> wishlistService.addToWishlist(apodDTO));
@@ -61,7 +61,7 @@ public class WishlistServiceImplTest {
 
 	@Test
 	public void testDeleteFromWishlist_Success() throws ImageDoesNotExistException {
-		ApodDTO apodDTO = new ApodDTO("url4", "Title 4", "2022-01-04");
+		WishlistDTO apodDTO = new WishlistDTO("url4", "Title 4", "2022-01-04");
 		when(wishlistRepository.existsByUrl(apodDTO.getUrl())).thenReturn(true);
 
 		assertDoesNotThrow(() -> wishlistService.deleteFromWishlist(apodDTO));
@@ -71,7 +71,7 @@ public class WishlistServiceImplTest {
 
 	@Test
 	public void testAddToWishlist_ImageAlreadyExistsException() {
-		ApodDTO apodDTO = new ApodDTO("url5", "Title 5", "2022-01-05");
+		WishlistDTO apodDTO = new WishlistDTO("url5", "Title 5", "2022-01-05");
 		when(wishlistRepository.existsByUrl(apodDTO.getUrl())).thenReturn(true);
 
 		assertThrows(ImageAlreadyExistsException.class, () -> wishlistService.addToWishlist(apodDTO));
@@ -81,7 +81,7 @@ public class WishlistServiceImplTest {
 
 	@Test
 	public void testDeleteFromWishlist_ImageDoesNotExistException() {
-		ApodDTO apodDTO = new ApodDTO("url6", "Title 6", "2022-01-06");
+		WishlistDTO apodDTO = new WishlistDTO("url6", "Title 6", "2022-01-06");
 		when(wishlistRepository.existsByUrl(apodDTO.getUrl())).thenReturn(false);
 
 		assertThrows(ImageDoesNotExistException.class, () -> wishlistService.deleteFromWishlist(apodDTO));

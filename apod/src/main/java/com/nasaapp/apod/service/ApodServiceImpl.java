@@ -25,7 +25,7 @@ public class ApodServiceImpl implements ApodService {
 
 	private final Logger logger = LoggerFactory.getLogger(ApodServiceImpl.class);
 
-	private String lastReceivedMessage;
+	String lastReceivedMessage;
 
 	String baseUrl = "https://api.nasa.gov/planetary/";
 
@@ -66,9 +66,10 @@ public class ApodServiceImpl implements ApodService {
 		HttpHeaders headers = gethttpHeaders();
 		System.out.println("Received headers: " + headers);
 		return responseEntity.getBody();
+
 	}
 
-	private HttpHeaders gethttpHeaders() {
+	HttpHeaders gethttpHeaders() {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		headers.setContentType(MediaType.APPLICATION_JSON);
@@ -90,7 +91,7 @@ public class ApodServiceImpl implements ApodService {
 
 	}
 
-	private String getJWTTokenfromKafka() {
+	public String getJWTTokenfromKafka() {
 
 		String prefix = "and the token generated is: ";
 		int startIndex = lastReceivedMessage.indexOf(prefix);

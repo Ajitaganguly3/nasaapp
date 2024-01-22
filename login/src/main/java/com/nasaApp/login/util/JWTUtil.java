@@ -20,7 +20,7 @@ public class JWTUtil {
 	Logger logger = LoggerFactory.getLogger(JWTUtil.class);
 
 	public String generateToken(String username) {
-		System.out.println(secretKey);
+		logger.info(secretKey);
 		return Jwts.builder().setSubject(username).setExpiration(new Date(System.currentTimeMillis() + expirationTime))
 				.signWith(SignatureAlgorithm.HS256, secretKey).compact();
 	}

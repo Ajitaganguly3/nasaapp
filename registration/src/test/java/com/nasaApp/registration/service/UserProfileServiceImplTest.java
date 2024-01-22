@@ -12,8 +12,11 @@ import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
+import org.springframework.kafka.core.KafkaTemplate;
 
 import com.nasaApp.registration.dto.UserProfileDTO;
 import com.nasaApp.registration.entity.UserProfile;
@@ -26,14 +29,22 @@ import com.nasaApp.registration.response.UserCredentialsResponse;
 import com.nasaApp.registration.validation.UserProfileValidation;
 
 public class UserProfileServiceImplTest {
-	private final UserProfileRepository userProfileRepository = Mockito.mock(UserProfileRepository.class);
-	private final UserProfileServiceImpl userProfileService = new UserProfileServiceImpl(userProfileRepository);
+
+	@Mock
+	private UserProfileRepository userProfileRepository;
+
+	@Mock
+	private KafkaTemplate<String, Object> kafkaTemplate;
+
+	@InjectMocks
+	private UserProfileServiceImpl userProfileService;
 
 	private UserProfileDTO sampleUserProfileDTO;
 
 	@BeforeEach
 	void setUp() {
 		// Initializing any common test data or objects
+		MockitoAnnotations.openMocks(this);
 		sampleUserProfileDTO = new UserProfileDTO("ajita", "ganguly", "ajita@mail.com", "ajita1", "9914366429",
 				"Ajita@123", "Ajita@123");
 	}

@@ -6,8 +6,6 @@ import jakarta.validation.constraints.NotEmpty;
 
 public class UserProfileDTO {
 
-	private String id;
-
 	@NotEmpty(message = "First Name cannot be empty or null")
 	private String firstName;
 	@NotEmpty(message = "Last Name cannot be empty or null")
@@ -33,14 +31,6 @@ public class UserProfileDTO {
 		this.contactNumber = contactNumber;
 		this.password = password;
 		this.confirmPassword = confirmPassword;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getFirstName() {

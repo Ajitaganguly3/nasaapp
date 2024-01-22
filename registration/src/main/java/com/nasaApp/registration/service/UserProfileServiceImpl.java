@@ -2,7 +2,6 @@ package com.nasaApp.registration.service;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
@@ -25,12 +24,13 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 	private final UserProfileRepository userProfileRepository;
 
-	public UserProfileServiceImpl(UserProfileRepository userProfileRepository) {
-		this.userProfileRepository = userProfileRepository;
-	}
+	private final KafkaTemplate<String, Object> kafkaTemplate;
 
-	@Autowired
-	private KafkaTemplate<String, Object> kafkaTemplate;
+	public UserProfileServiceImpl(UserProfileRepository userProfileRepository,
+			KafkaTemplate<String, Object> kafkaTemplate) {
+		this.userProfileRepository = userProfileRepository;
+		this.kafkaTemplate = kafkaTemplate;
+	}
 
 	@Override
 	public MessageResponse register(@Valid UserProfileDTO userProfileDto)

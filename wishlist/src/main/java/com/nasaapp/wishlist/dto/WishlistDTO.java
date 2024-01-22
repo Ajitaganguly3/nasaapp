@@ -1,22 +1,20 @@
 package com.nasaapp.wishlist.dto;
 
-import java.io.Serializable;
-
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ApodDTO implements Serializable {
+@Builder
+public class WishlistDTO {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -2070387535953331853L;
+	// private static final long serialVersionUID = -2070387535953331853L;
 
 	private String copyright;
 	private String title;
@@ -26,29 +24,14 @@ public class ApodDTO implements Serializable {
 	private String media_type;
 	private String service_version;
 	private String url;
+	private String username;
 
-	public ApodDTO(String url, String title, String date) {
-		// TODO Auto-generated constructor stub
-		this.url = url;
-		this.title = title;
-		this.date = date;
+	public String getUsername() {
+		return username;
 	}
 
-	public ApodDTO() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public ApodDTO(String copyright, String title, String date, String explanation, String hdurl, String media_type,
-			String service_version, String url) {
-		// TODO Auto-generated constructor stub
-		this.copyright = copyright;
-		this.title = title;
-		this.date = date;
-		this.explanation = explanation;
-		this.hdurl = hdurl;
-		this.media_type = media_type;
-		this.service_version = service_version;
-		this.url = url;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getCopyright() {

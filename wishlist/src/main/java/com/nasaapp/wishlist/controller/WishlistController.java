@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nasaapp.wishlist.dto.ApodDTO;
+import com.nasaapp.wishlist.dto.WishlistDTO;
 import com.nasaapp.wishlist.entity.Wishlist;
 import com.nasaapp.wishlist.exceptions.ImageAlreadyExistsException;
 import com.nasaapp.wishlist.exceptions.ImageDoesNotExistException;
@@ -42,7 +42,7 @@ public class WishlistController {
 			@ApiResponse(responseCode = "409", description = "URL already exists in the wishlist", content = @Content) })
 
 	@PostMapping("/add")
-	public ResponseEntity<String> addToWishlist(@RequestBody ApodDTO apodDTO) throws ImageAlreadyExistsException {
+	public ResponseEntity<String> addToWishlist(@RequestBody WishlistDTO apodDTO) throws ImageAlreadyExistsException {
 		try {
 			wishlistService.addToWishlist(apodDTO);
 			return ResponseEntity.ok("Added to wishlist successfully.");
@@ -73,7 +73,7 @@ public class WishlistController {
 			@ApiResponse(responseCode = "404", description = "Image does not exist in the wishlist", content = @Content) })
 
 	@DeleteMapping("/delete")
-	public ResponseEntity<String> deleteFromWishlist(@RequestBody ApodDTO apodDTO) throws ImageDoesNotExistException {
+	public ResponseEntity<String> deleteFromWishlist(@RequestBody WishlistDTO apodDTO) throws ImageDoesNotExistException {
 		try {
 			wishlistService.deleteFromWishlist(apodDTO);
 			return ResponseEntity.ok("Deleted from wishlist successfully.");

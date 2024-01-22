@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.nasaapp.wishlist.dto.ApodDTO;
+import com.nasaapp.wishlist.dto.WishlistDTO;
 import com.nasaapp.wishlist.entity.Wishlist;
 import com.nasaapp.wishlist.exceptions.ImageAlreadyExistsException;
 import com.nasaapp.wishlist.exceptions.ImageDoesNotExistException;
@@ -35,7 +35,7 @@ public class WishlistControllerTest {
 
 	@Test
 	void addToWishlist_Success() throws ImageAlreadyExistsException {
-		ApodDTO apodDTO = new ApodDTO();
+		WishlistDTO apodDTO = new WishlistDTO();
 		doNothing().when(wishlistService).addToWishlist(apodDTO);
 
 		ResponseEntity<String> response = wishlistController.addToWishlist(apodDTO);
@@ -46,7 +46,7 @@ public class WishlistControllerTest {
 
 	@Test
 	void addToWishlist_Conflict() throws ImageAlreadyExistsException {
-		ApodDTO apodDTO = new ApodDTO();
+		WishlistDTO apodDTO = new WishlistDTO();
 		doThrow(new ImageAlreadyExistsException("Image already exists")).when(wishlistService).addToWishlist(apodDTO);
 
 		ResponseEntity<String> response = wishlistController.addToWishlist(apodDTO);
@@ -78,7 +78,7 @@ public class WishlistControllerTest {
 
 	@Test
 	void deleteFromWishlist_Success() throws ImageDoesNotExistException {
-		ApodDTO apodDTO = new ApodDTO(); // provide appropriate values
+		WishlistDTO apodDTO = new WishlistDTO(); // provide appropriate values
 		doNothing().when(wishlistService).deleteFromWishlist(apodDTO);
 
 		ResponseEntity<String> response = wishlistController.deleteFromWishlist(apodDTO);
@@ -89,7 +89,7 @@ public class WishlistControllerTest {
 
 	@Test
 	void deleteFromWishlist_NotFound() throws ImageDoesNotExistException {
-		ApodDTO apodDTO = new ApodDTO(); // provide appropriate values
+		WishlistDTO apodDTO = new WishlistDTO(); // provide appropriate values
 		doThrow(new ImageDoesNotExistException("Image does not exist")).when(wishlistService)
 				.deleteFromWishlist(apodDTO);
 

@@ -4,12 +4,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-public class ApodDTOTest {
+public class WishlistDTOTest {
 
 	@Test
 	void testGettersAndSetters() {
 
-		ApodDTO apod = new ApodDTO("Copyright", "Title", "2024-01-19", "Explanation", "HDURL", "MediaType",
+		WishlistDTO apod = new WishlistDTO("Copyright", "Title", "2024-01-19", "Explanation", "HDURL", "MediaType",
 				"ServiceVersion", "URL");
 
 		// Testing getters

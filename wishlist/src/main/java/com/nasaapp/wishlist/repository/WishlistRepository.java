@@ -1,15 +1,16 @@
 package com.nasaapp.wishlist.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.nasaapp.wishlist.entity.Wishlist;
+import com.nasaapp.wishlist.entity.WishlistId;
 
 @Repository
-public interface WishlistRepository extends JpaRepository<Wishlist, String> {
+public interface WishlistRepository extends JpaRepository<Wishlist, WishlistId> {
 
-	boolean existsByUrl(String url);
-
-	void deleteByUrl(String url);
+	List<Wishlist> findByUsername(String username);
 
 }

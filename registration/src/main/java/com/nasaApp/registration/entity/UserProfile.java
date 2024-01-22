@@ -2,9 +2,7 @@ package com.nasaApp.registration.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.Builder;
 
-@Builder
 @Entity
 public class UserProfile {
 
@@ -71,18 +69,6 @@ public class UserProfile {
 
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
-	}
-
-	public UserProfile(String username, String firstName, String lastName, String password, String confirmPassword,
-			String contactNumber, String email) {
-		super();
-		this.username = username;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.password = password;
-		this.confirmPassword = confirmPassword;
-		this.contactNumber = contactNumber;
-		this.email = email;
 	}
 
 	public UserProfile() {
