@@ -7,4 +7,5 @@ import com.nasaApp.login.entity.Authentication;
 public interface AuthRepository extends JpaRepository<Authentication, String> {
 
 	Authentication findByUsername(String username);
+
 }
