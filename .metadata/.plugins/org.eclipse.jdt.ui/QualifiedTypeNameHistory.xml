@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.nasaApp.registration.repository.UserProfileRepository"/>
-    <fullyQualifiedTypeName name="com.nasaApp.registration.entity.UserProfile"/>
-    <fullyQualifiedTypeName name="com.nasaApp.registration.response.MessageResponse"/>
     <fullyQualifiedTypeName name="com.nasaApp.registration.exceptions.InvalidPasswordException"/>
     <fullyQualifiedTypeName name="com.nasaApp.registration.exceptions.UsernameAlreadyExistException"/>
     <fullyQualifiedTypeName name="com.nasaApp.registration.dto.UserProfileDTO"/>
@@ -25,7 +22,6 @@
     <fullyQualifiedTypeName name="com.nasaApp.login.entity.Authentication"/>
     <fullyQualifiedTypeName name="com.nasaApp.login.responses.SuccessResponse"/>
     <fullyQualifiedTypeName name="org.mockito.ArgumentMatchers"/>
-    <fullyQualifiedTypeName name="org.mockito.Mockito"/>
     <fullyQualifiedTypeName name="org.springframework.http.MediaType"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpEntity"/>
     <fullyQualifiedTypeName name="com.nasaApp.login.responses.RegistrationResponse"/>
@@ -50,8 +46,6 @@
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="com.nasaapp.wishlist.dto.ApodById"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Entity"/>
-    <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
-    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpHeaders"/>
     <fullyQualifiedTypeName name="org.slf4j.Logger"/>
     <fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
@@ -60,4 +54,10 @@
     <fullyQualifiedTypeName name="io.jsonwebtoken.Claims"/>
     <fullyQualifiedTypeName name="com.nasaApp.login.util.JWTUtil"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Value"/>
+    <fullyQualifiedTypeName name="org.mockito.Mockito"/>
+    <fullyQualifiedTypeName name="com.nasaapp.wishlist.dto.WishlistDTO"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
+    <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
+    <fullyQualifiedTypeName name="com.nasaapp.wishlist.entity.Wishlist"/>
+    <fullyQualifiedTypeName name="com.nasaapp.wishlist.entity.WishlistId"/>
 </qualifiedTypeNameHistroy>

@@ -1,16 +1,18 @@
 package com.nasaapp.wishlist.dto;
 
+import java.io.Serializable;
+
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class WishlistDTO {
+public class WishlistDTO implements Serializable{
 
 	/**
 	 * 
 	 */
-	// private static final long serialVersionUID = -2070387535953331853L;
+	 private static final long serialVersionUID = -2070387535953331853L;
 
 	private String copyright;
 	private String title;
