@@ -10,33 +10,37 @@ https://api.nasa.gov/
 
 1. **Microservices**:
     
-    -  Registration
-    -  Login
-    -  APOD (Third Party URL)  
+    - Registration
+    - Login
+    - APOD (Third Party URL)  
     - Wishlist 
     - Eureka Service
     - API Gateway
     - Config Server
 
-2. **Custom Response**
-3. **Custom Exceptions**
-4. **Global Exception Handler** (Registration MS)
-5. **Microservice Communication** (Rest Template -- Login MS and APOD MS)
-6. **Kafka** 
+2. **JWT Token Creation**  (Login MS)
+3. **JWT Token Validation** (API Gateway MS)
+4. **Custom Responses**
+5. **Spring Security** (Login MS)
+6. **Custom Exceptions**
+7. **Global Exception Handler** (Registration MS)
+8. **Microservice Communication** (Rest Template -- Login MS and APOD MS)
+9. **Kafka** 
     
     - Registration MS (Producer)
     - Login MS (Producer and Consumer)
     - APOD MS (Consumer)
 
-7. **Testing** (Jacoco)
-8. **Swagger** (All MS)
-9. **Logging**
+10. **Testing** (Jacoco)
+11. **Swagger** (All MS)
+12. **Logging**
     
     - Logger
     - slf4j
     - sysout
-10. **Tracing** (Zipkin)
-11. **Circuit Breaker** (Login MS)
-12. **Caching** (EH Cache) (Wishlist MS)
+13. **Tracing** (Zipkin)
+14. **Circuit Breaker** (Login MS)
+15. **Caching** (EH Cache) (Wishlist MS)
+
 
 
