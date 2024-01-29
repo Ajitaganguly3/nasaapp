@@ -1,19 +1,52 @@
 import React, { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
-import axios from "axios";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
-import { MenuItem, Menu, TextField, Autocomplete } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { TextField, Autocomplete, MenuItem, Menu, Popover } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-
 
 export default function NavBar() {
     const [navOpen, setNavOpen] = useState(null);
+    const [searchOpen, setSearchOpen] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
+    const [menuItems, setMenuItems] = useState([]);
+    const navigate = useNavigate();
 
+    const toggleSearch = () => {
+        setSearchOpen(!searchOpen);
+    };
+
+    const toggleNav = (event) => {
+        setNavOpen(event.currentTarget);
+    };
+
+    const closeNav = () => {
+        setNavOpen(null);
+    };
+
+    useEffect(() => {
+        const getMenuItems = () => {
+            if (loggedIn) {
+                return [
+                    { label: "Wishlist", path: "/wishlist" },
+                    { label: "Logout", path: "/" },
+                ];
+
+            } else {
+                return [
+                    { label: "Sign In", path: "/login" },
+                    { label: "Sign Up", path: "/register" }
+                ]
+            }
+        };
+        const updatedMenuItems = getMenuItems();
+        setMenuItems(updatedMenuItems);
+
+    }, [loggedIn]);
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -25,96 +58,113 @@ export default function NavBar() {
                 }}
             >
                 <Toolbar sx={{ justifyContent: "space-between" }}>
-                    <Box sx={{ display: "flex", alignItems: "center" }}>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            flexGrow: 1,
+                        }}
+                    >
                         <IconButton
                             size="large"
                             edge="start"
                             color="inherit"
                             aria-label="menu"
                             sx={{ mr: 2 }}
-
+                            onClick={toggleNav}
                         >
                             <MenuIcon />
                         </IconButton>
                         <Link
-                            to="/home"
+                            to="/"
                             style={{ textDecoration: "none", color: "inherit" }}
                         >
-                            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                            <Typography variant="h6" component="div">
                                 NasaApp
                             </Typography>
                         </Link>
                     </Box>
+                    <Box sx={{ display: "flex", alignItems: "center", flexGrow: 1, }}>
+                        <img
+                            src="https://cdn.icon-icons.com/icons2/2699/PNG/512/nasa_logo_icon_170926.png"
+                            alt="NasaApp Icon"
+                            style={{ width: "10vh", height: "10vh" }}
+                        />
+                    </Box>
                     <Box
                         sx={{
                             display: "flex",
-                            alignItems: "flex-start",
-                            position: "inherit",
+                            alignItems: "center",
                         }}
                     >
-                        <Autocomplete
-                            options={[]}
-                            freeSolo
-
-                            renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    type="text"
-                                    variant="outlined"
-                                    placeholder="Search..."
-                                    size="small"
-                                    sx={{
-                                        width: "50vh",
-                                        borderRadius: "20vh",
-                                        bgcolor: "white",
-                                        "& .MuiOutlinedInput-root": {
-                                            "&:hover fieldset": {
+                        {searchOpen ? (
+                            <Autocomplete
+                                options={[]}
+                                freeSolo
+                                open={searchOpen}
+                                onOpen={toggleSearch}
+                                onClose={toggleSearch}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        type="text"
+                                        variant="outlined"
+                                        placeholder="Search..."
+                                        size="small"
+                                        sx={{
+                                            width: "50vh",
+                                            borderRadius: "20vh",
+                                            bgcolor: "white",
+                                            "& .MuiOutlinedInput-root": {
+                                                "&:hover fieldset": {
+                                                    borderColor: "red",
+                                                },
+                                            },
+                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                border: "none",
+                                            },
+                                            "&:hover .MuiOutlinedInput-notchedOutline": {
                                                 borderColor: "red",
                                             },
-                                        },
-                                        "& .MuiOutlinedInput-notchedOutline": {
-                                            border: "none",
-                                        },
-                                        "&:hover .MuiOutlinedInput-notchedOutline": {
-                                            borderColor: "red",
-                                        },
-                                    }}
-                                />
-                            )}
-
-                        />
-                        <div
-                            style={{
-                                position: "absolute",
-                                top: 0,
-                                right: 0,
-                                bottom: 0,
-                                left: 0,
-                                pointerEvents: "none",
-                                borderRadius: "20vh",
-                                border: "1vh solid transparent",
-                                transition: "border-color 0.2s",
-                            }}
-                        />
+                                        }}
+                                    />
+                                )}
+                            />
+                        ) : (
+                            <IconButton
+                                size="large"
+                                color="inherit"
+                                aria-label="search"
+                                onClick={toggleSearch}
+                            >
+                                <SearchIcon />
+                            </IconButton>
+                        )}
                     </Box>
-
-                    <>
-                        <Button
-                            component={Link}
-                            to="/register"
-                            color="inherit"
-                            sx={{
-                                color: "white",
-                                marginRight: "10vh",
-                                bgcolor: "#cb0d0d",
-                                ":hover": { color: "#cb0d0d" },
-                            }}
+                    {menuItems.length > 0 && (
+                        <Menu
+                            anchorEl={navOpen}
+                            open={Boolean(navOpen)}
+                            onClose={closeNav}
+                            onClick={closeNav}
                         >
-                            Register
-                        </Button>
-                    </>
-
-
+                            {menuItems.map((menuItem, index) => (
+                                <MenuItem
+                                    key={index}
+                                    component={Link}
+                                    to={menuItem.path}
+                                    onClick={closeNav}
+                                    sx={{
+                                        width: "125px",
+                                        bgcolor: "white",
+                                        ":hover": { color: "#cb0d0d" },
+                                    }}
+                                >
+                                    {menuItem.label}
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    )}
                 </Toolbar>
             </AppBar>
         </Box>

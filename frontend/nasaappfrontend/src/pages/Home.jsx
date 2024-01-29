@@ -20,7 +20,7 @@ const Home = () => {
                 infiniteLoop={true}
                 showStatus={false}
                 showIndicators={true}
-                showArrows={true}
+                showArrows={false}
                 style={{ width: "100%" }}
             >
                 {carouselImages
@@ -64,7 +64,7 @@ const Home = () => {
             </Typography>
             <Grid container spacing={2}>
                 <Grid item xs={12} sm={6} md={4}>
-                    <Card sx={{ maxWidth: 550, position: "relative" }}>
+                    <Card sx={{ maxWidth: 650, position: "relative" }}>
                         <CardMedia
                             component="img"
                             height="350"
@@ -75,9 +75,7 @@ const Home = () => {
 
                         </CardMedia>
                         <CardContent>
-                            <Typography variant="h6" gutterBottom className="card-title">
-                                NEWS RELEASE
-                            </Typography>
+
                             <Typography variant="body1" color="text.secondary">
                                 NASA Sets Coverage for Northrop  Grumman Cargo Space Station Mission
                             </Typography>
@@ -93,9 +91,7 @@ const Home = () => {
                             alt="Featured Article"
                         />
                         <CardContent>
-                            <Typography variant="h4" gutterBottom className="card-title">
-                                Article
-                            </Typography>
+
                             <Typography variant="body1" color="text.secondary">
                                 Landing on Mars: A Tricky Feat!
                             </Typography>
@@ -111,9 +107,7 @@ const Home = () => {
                             alt="Featured Article"
                         />
                         <CardContent>
-                            <Typography variant="h4" gutterBottom className="card-title">
-                                Article
-                            </Typography>
+
                             <Typography variant="body1" color="text.secondary">
                                 2023 NASA International Space Apps Challenge Announces 10 Global Winners
                             </Typography>

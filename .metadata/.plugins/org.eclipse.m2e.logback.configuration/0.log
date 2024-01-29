@@ -3016,3 +3016,82 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.springfra
 2024-01-19 17:21:04,129 [Worker-176: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 2 resources from src\main\resources to target\classes
 2024-01-19 17:21:04,164 [Worker-176: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2024-01-19 17:21:04,166 [Worker-176: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(H&T)\nasaapp\login\src\test\resources
+2024-01-29 15:37:31,052 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-01-29 15:47:02,888 [Worker-5: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.nasaapp:wishlist:0.0.1-SNAPSHOT @ C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\wishlist\pom.xml.
+2024-01-29 15:47:20,990 [Worker-5: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.nasaapp:apod:0.0.1-SNAPSHOT @ C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\apod\pom.xml.
+2024-01-29 15:47:22,318 [Worker-5: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.nasaApp:registration:0.0.1-SNAPSHOT @ C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\registration\pom.xml.
+2024-01-29 15:47:24,474 [Worker-5: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.nasaApp:login:0.0.1-SNAPSHOT @ C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\login\pom.xml.
+2024-01-29 15:47:27,650 [Worker-5: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.nasaApp:nasaAppEurekaService:0.0.1-SNAPSHOT @ C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\nasaAppEurekaService\pom.xml.
+2024-01-29 15:47:28,993 [Worker-5: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.nasaApp:nasaApiGateway:0.0.1-SNAPSHOT @ C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\nasaApiGateway\pom.xml.
+2024-01-29 15:47:30,125 [Worker-5: Importing Maven projects] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.nasaapp:nasaAppConfigServer:0.0.1-SNAPSHOT @ C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\nasaAppConfigServer\pom.xml.
+2024-01-29 15:48:36,154 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /apod/src/main/java
+2024-01-29 15:48:36,157 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /apod/src/main/resources
+2024-01-29 15:48:36,227 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /apod/src/main/resources
+2024-01-29 15:48:36,305 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /apod/src/test/java
+2024-01-29 15:48:58,737 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /nasaApiGateway/src/main/java
+2024-01-29 15:48:58,738 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /nasaApiGateway/src/main/resources
+2024-01-29 15:48:58,780 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /nasaApiGateway/src/main/resources
+2024-01-29 15:48:58,833 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /nasaApiGateway/src/test/java
+2024-01-29 15:49:09,847 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /nasaAppConfigServer/src/main/java
+2024-01-29 15:49:09,849 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /nasaAppConfigServer/src/main/resources
+2024-01-29 15:49:09,900 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /nasaAppConfigServer/src/main/resources
+2024-01-29 15:49:09,965 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /nasaAppConfigServer/src/test/java
+2024-01-29 15:49:17,729 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /registration/src/main/java
+2024-01-29 15:49:17,731 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /registration/src/main/resources
+2024-01-29 15:49:17,780 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /registration/src/main/resources
+2024-01-29 15:49:17,845 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /registration/src/test/java
+2024-01-29 15:49:37,450 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /login/src/main/java
+2024-01-29 15:49:37,451 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /login/src/main/resources
+2024-01-29 15:49:37,590 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /login/src/main/resources
+2024-01-29 15:49:37,657 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /login/src/test/java
+2024-01-29 15:49:57,145 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /nasaAppEurekaService/src/main/java
+2024-01-29 15:49:57,146 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /nasaAppEurekaService/src/main/resources
+2024-01-29 15:49:57,359 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /nasaAppEurekaService/src/main/resources
+2024-01-29 15:49:57,429 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /nasaAppEurekaService/src/test/java
+2024-01-29 15:50:09,912 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /wishlist/src/main/java
+2024-01-29 15:50:09,914 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /wishlist/src/main/resources
+2024-01-29 15:50:09,995 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /wishlist/src/main/resources
+2024-01-29 15:50:10,062 [Worker-5: Importing Maven projects] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /wishlist/src/test/java
+2024-01-29 15:50:27,688 [Worker-5: Importing Maven projects] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 7 project(s) in 220 sec
+2024-01-29 15:50:41,268 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-29 15:50:41,391 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 15:50:41,413 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\apod\src\test\resources
+2024-01-29 15:50:55,735 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-29 15:50:55,794 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 15:50:55,813 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\login\src\test\resources
+2024-01-29 15:50:58,049 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-29 15:50:58,105 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 15:50:58,124 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\nasaApiGateway\src\test\resources
+2024-01-29 15:50:59,396 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-29 15:50:59,461 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 15:50:59,483 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\nasaAppConfigServer\src\test\resources
+2024-01-29 15:51:00,718 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-29 15:51:00,767 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 15:51:00,787 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\nasaAppEurekaService\src\test\resources
+2024-01-29 15:51:10,716 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-29 15:51:10,787 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 15:51:10,811 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\registration\src\test\resources
+2024-01-29 15:51:15,782 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-29 15:51:15,836 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-29 15:51:15,885 [Worker-9: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\wishlist\src\test\resources
+2024-01-29 17:43:48,001 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,003 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,010 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\apod\src\test\resources
+2024-01-29 17:43:48,168 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,169 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,172 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\login\src\test\resources
+2024-01-29 17:43:48,219 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,220 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,224 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\nasaApiGateway\src\test\resources
+2024-01-29 17:43:48,251 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,251 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,254 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\nasaAppConfigServer\src\test\resources
+2024-01-29 17:43:48,287 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,287 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,292 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\nasaAppEurekaService\src\test\resources
+2024-01-29 17:43:48,365 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,366 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,371 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\registration\src\test\resources
+2024-01-29 17:43:48,427 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,427 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:43:48,433 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\wishlist\src\test\resources
