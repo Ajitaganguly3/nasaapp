@@ -15,6 +15,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useDispatch } from "react-redux";
+import { login } from "../redux/authSlice";
 
 function CustomizedTextField(props) {
     return (
@@ -60,8 +62,8 @@ export default function SignIn() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -73,7 +75,7 @@ export default function SignIn() {
 
         };
 
-        axios.post('http://localhost:9090/auth/login', payload)
+        axios.post('http://localhost:9090/auth/authenticate', payload)
             .then((response) => {
                 console.log(response.data);
                 setUsername('');
@@ -82,6 +84,7 @@ export default function SignIn() {
                 localStorage.setItem("successResponse", JSON.stringify(response.data));
                 const successResponse = localStorage.getItem("successResponse");
                 console.log(successResponse);
+                dispatch(login());
                 navigate("/");
             })
             .catch((error) => {

@@ -8,13 +8,17 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { TextField, Autocomplete, MenuItem, Menu, Popover } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectLoggedIn } from "../redux/authSlice";
 
 export default function NavBar() {
     const [navOpen, setNavOpen] = useState(null);
     const [searchOpen, setSearchOpen] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
     const [menuItems, setMenuItems] = useState([]);
     const navigate = useNavigate();
+    const location = useLocation();
+    const loggedIn = useSelector(selectLoggedIn);
+    const dispatch = useDispatch();
 
     const toggleSearch = () => {
         setSearchOpen(!searchOpen);
@@ -28,25 +32,37 @@ export default function NavBar() {
         setNavOpen(null);
     };
 
+    const handleSignOut = () => {
+        dispatch(logout());
+        navigate("/");
+        setMenuItems([
+            { label: "Sign In", path: "/login" },
+            { label: "Sign Up", path: "/register" },
+        ]);
+    };
+
     useEffect(() => {
         const getMenuItems = () => {
             if (loggedIn) {
                 return [
+                    { label: "Explore", path: "/apod" },
                     { label: "Wishlist", path: "/wishlist" },
-                    { label: "Logout", path: "/" },
+                    {
+                        label: "Sign Out", onClick: handleSignOut,
+                    },
                 ];
 
             } else {
                 return [
                     { label: "Sign In", path: "/login" },
                     { label: "Sign Up", path: "/register" }
-                ]
+                ];
             }
         };
         const updatedMenuItems = getMenuItems();
         setMenuItems(updatedMenuItems);
 
-    }, [loggedIn]);
+    }, [loggedIn, dispatch, navigate]);
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -153,7 +169,7 @@ export default function NavBar() {
                                     key={index}
                                     component={Link}
                                     to={menuItem.path}
-                                    onClick={closeNav}
+                                    onClick={menuItem.onClick || closeNav}
                                     sx={{
                                         width: "125px",
                                         bgcolor: "white",
