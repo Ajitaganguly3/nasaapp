@@ -3095,3 +3095,77 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.springfra
 2024-01-29 17:43:48,427 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2024-01-29 17:43:48,427 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2024-01-29 17:43:48,433 [Worker-41: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\wishlist\src\test\resources
+2024-01-29 17:45:29,547 [Worker-39: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-29 17:45:29,574 [Worker-39: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-29 17:45:29,578 [Worker-39: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\login\src\test\resources
+2024-01-31 15:45:52,255 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-01-31 15:59:18,504 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 15:59:18,613 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-31 15:59:18,617 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\registration\src\test\resources
+2024-01-31 16:00:06,731 [Worker-23: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 16:00:06,742 [Worker-23: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-31 16:00:06,746 [Worker-23: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\login\src\test\resources
+2024-01-31 16:02:33,538 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-10.0.11; built: 2022-06-21T21:12:44.640Z; git: d988aa016e0bb2de6fba84c1659049c72eae3e32; jvm 17.0.4.1+1
+2024-01-31 16:02:33,587 [Start Help Server] INFO  o.e.j.s.s.DefaultSessionIdManager - Session workerName=node0
+2024-01-31 16:02:33,683 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@15a423d0{/help,null,AVAILABLE}
+2024-01-31 16:02:33,787 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@dd90a6b{HTTP/1.1, (http/1.1)}{127.0.0.1:63882}
+2024-01-31 16:02:33,820 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started Server@70e737b8{STARTING}[10.0.11,sto=0] @1158693ms
+2024-01-31 16:02:39,220 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 16:02:39,242 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-31 16:02:39,248 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\login\src\test\resources
+2024-01-31 16:03:22,561 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 16:03:22,581 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-31 16:03:22,587 [Worker-24: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\registration\src\test\resources
+2024-01-31 16:09:32,902 [Worker-25: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 16:09:32,934 [Worker-25: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-31 16:09:32,938 [Worker-25: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\registration\src\test\resources
+2024-01-31 16:10:23,598 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 16:10:23,621 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-31 16:10:23,627 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\registration\src\test\resources
+2024-01-31 16:10:41,492 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 16:10:41,502 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-31 16:10:41,505 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\registration\src\test\resources
+2024-01-31 16:11:01,777 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 16:11:01,804 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-31 16:11:01,808 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\login\src\test\resources
+2024-01-31 16:11:32,391 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 16:11:32,404 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-31 16:11:32,407 [Worker-18: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\login\src\test\resources
+2024-01-31 16:11:44,848 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 16:11:44,865 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-31 16:11:44,869 [Worker-20: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\login\src\test\resources
+2024-01-31 22:14:28,284 [Worker-101: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 22:14:28,425 [Worker-101: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-01-31 22:14:28,432 [Worker-101: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\apod\src\test\resources
+2024-01-31 22:15:03,956 [Worker-100: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 22:15:04,035 [Worker-100: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-01-31 22:15:04,052 [Worker-100: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\wishlist\src\test\resources
+2024-01-31 23:32:04,848 [Stop Help Server] INFO  org.eclipse.jetty.server.Server - Stopped Server@70e737b8{STOPPING}[10.0.11,sto=0]
+2024-01-31 23:32:04,952 [Stop Help Server] INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@dd90a6b{HTTP/1.1, (http/1.1)}{127.0.0.1:0}
+2024-01-31 23:32:05,224 [Stop Help Server] INFO  o.e.j.server.handler.ContextHandler - Stopped o.e.j.s.ServletContextHandler@15a423d0{/help,null,STOPPED}
+2024-02-01 09:16:10,821 [Worker-3: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-02-02 09:26:55,268 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2024-02-02 10:01:18,716 [Worker-16: Launching nasaApiGateway - NasaApiGatewayApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-02-02 10:01:19,194 [Worker-16: Launching nasaApiGateway - NasaApiGatewayApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-02-02 10:01:19,218 [Worker-16: Launching nasaApiGateway - NasaApiGatewayApplication] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\nasaApiGateway\src\test\resources
+2024-02-02 10:01:55,244 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-02-02 10:01:55,281 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-02-02 10:01:55,292 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\apod\src\test\resources
+2024-02-02 10:02:06,782 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-02-02 10:02:06,805 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-02-02 10:02:06,832 [Worker-19: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\wishlist\src\test\resources
+2024-02-02 15:38:35,794 [Worker-106: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-02-02 15:38:35,863 [Worker-106: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-02-02 15:38:35,870 [Worker-106: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\apod\src\test\resources
+2024-02-02 15:38:36,761 [Worker-107: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-02-02 15:38:36,848 [Worker-107: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-02-02 15:38:36,861 [Worker-107: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\wishlist\src\test\resources
+2024-02-02 19:12:26,891 [Start Help Server] INFO  org.eclipse.jetty.server.Server - jetty-10.0.11; built: 2022-06-21T21:12:44.640Z; git: d988aa016e0bb2de6fba84c1659049c72eae3e32; jvm 17.0.4.1+1
+2024-02-02 19:12:26,936 [Start Help Server] INFO  o.e.j.s.s.DefaultSessionIdManager - Session workerName=node0
+2024-02-02 19:12:27,020 [Start Help Server] INFO  o.e.j.server.handler.ContextHandler - Started o.e.j.s.ServletContextHandler@112923c5{/help,null,AVAILABLE}
+2024-02-02 19:12:27,094 [Start Help Server] INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@5721cc92{HTTP/1.1, (http/1.1)}{127.0.0.1:56569}
+2024-02-02 19:12:27,123 [Start Help Server] INFO  org.eclipse.jetty.server.Server - Started Server@1c4756e4{STARTING}[10.0.11,sto=0] @35325719ms
+2024-02-02 19:12:33,563 [Worker-186: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-02-02 19:12:33,665 [Worker-186: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-02-02 19:12:33,670 [Worker-186: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\new-workspace(HT)\nasaapp\backend\nasaApiGateway\src\test\resources
+2024-02-02 19:35:40,521 [Worker-193: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes

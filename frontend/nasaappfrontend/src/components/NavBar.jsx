@@ -9,7 +9,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { TextField, Autocomplete, MenuItem, Menu, Popover } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout, selectLoggedIn } from "../redux/authSlice";
+import { actions } from "../redux/authSlice";
 
 export default function NavBar() {
     const [navOpen, setNavOpen] = useState(null);
@@ -17,7 +17,7 @@ export default function NavBar() {
     const [menuItems, setMenuItems] = useState([]);
     const navigate = useNavigate();
     const location = useLocation();
-    const loggedIn = useSelector(selectLoggedIn);
+    const loggedIn = useSelector((state) => state.loggedIn);
     const dispatch = useDispatch();
 
     const toggleSearch = () => {
@@ -33,19 +33,40 @@ export default function NavBar() {
     };
 
     const handleSignOut = () => {
-        dispatch(logout());
-        navigate("/");
+
+        dispatch(actions.logout());
         setMenuItems([
             { label: "Sign In", path: "/login" },
             { label: "Sign Up", path: "/register" },
         ]);
+
+        navigate("/");
+        console.log("signed out");
+        console.log(loggedIn);
+
+
     };
+
+    const handleExplore = () => {
+        dispatch(actions.login());
+        navigate("/apod");
+        console.log(loggedIn);
+    };
+
+    const handleLogin = () => {
+        navigate("/login");
+    }
+
+    const handleRegister = () => {
+        navigate("/register");
+    }
 
     useEffect(() => {
         const getMenuItems = () => {
             if (loggedIn) {
+                console.log("loggin state:", loggedIn);
                 return [
-                    { label: "Explore", path: "/apod" },
+                    { label: "Explore", path: "/apod", onClick: handleExplore, },
                     { label: "Wishlist", path: "/wishlist" },
                     {
                         label: "Sign Out", onClick: handleSignOut,
@@ -53,14 +74,16 @@ export default function NavBar() {
                 ];
 
             } else {
+                console.log("loggedIn state:", loggedIn);
                 return [
-                    { label: "Sign In", path: "/login" },
-                    { label: "Sign Up", path: "/register" }
+                    { label: "Sign In", path: "/login", onClick: handleLogin},
+                    { label: "Sign Up", path: "/register", onClick: handleRegister },
                 ];
             }
         };
         const updatedMenuItems = getMenuItems();
         setMenuItems(updatedMenuItems);
+
 
     }, [loggedIn, dispatch, navigate]);
 

@@ -16,7 +16,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
-import { login } from "../redux/authSlice";
+import { actions } from "../redux/authSlice";
 
 function CustomizedTextField(props) {
     return (
@@ -81,11 +81,13 @@ export default function SignIn() {
                 setUsername('');
                 setPassword('');
                 //  alert("Login Successful");
+                localStorage.setItem("username", response.data.username);
                 localStorage.setItem("successResponse", JSON.stringify(response.data));
                 const successResponse = localStorage.getItem("successResponse");
+                console.log(response.data.username);
                 console.log(successResponse);
-                dispatch(login());
-                navigate("/");
+                dispatch(actions.login());
+                navigate("/", { state: { message: response.data.message, username: response.data.user } });
             })
             .catch((error) => {
                 if (error.response) {

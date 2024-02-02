@@ -28,8 +28,8 @@ public class AuthServiceImpl implements AuthService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	@Autowired
-	private KafkaTemplate<String, Object> kafkaTemplate;
+//	@Autowired
+//	private KafkaTemplate<String, Object> kafkaTemplate;
 
 	private Logger logger = LoggerFactory.getLogger(AuthService.class);
 
@@ -48,7 +48,7 @@ public class AuthServiceImpl implements AuthService {
 			authRepository.save(authentication);
 			String message = "Login successful for user: " + authentication.getUsername()
 					+ " and the token generated is: " + token;
-			kafkaTemplate.send(AppConstants.NASAAPP_LOGIN_TOPIC_NAME, message);
+//			kafkaTemplate.send(AppConstants.NASAAPP_LOGIN_TOPIC_NAME, message);
 
 			return new SuccessResponse("Login Successful!", authentication.getUsername(), token);
 		} else {
@@ -69,9 +69,9 @@ public class AuthServiceImpl implements AuthService {
 
 	}
 
-	@KafkaListener(topics = AppConstants.NASAAPP_REGISTRATION_TOPIC_NAME, groupId = AppConstants.GROUP_ID)
-	public void consumeRegistrationMessage(String message) {
-		System.out.println("Received registation message: " + message);
-	}
+//	@KafkaListener(topics = AppConstants.NASAAPP_REGISTRATION_TOPIC_NAME, groupId = AppConstants.GROUP_ID)
+//	public void consumeRegistrationMessage(String message) {
+//		System.out.println("Received registation message: " + message);
+//	}
 
 }

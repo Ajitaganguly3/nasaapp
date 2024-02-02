@@ -24,12 +24,12 @@ public class UserProfileServiceImpl implements UserProfileService {
 
 	private final UserProfileRepository userProfileRepository;
 
-	private final KafkaTemplate<String, Object> kafkaTemplate;
+//	private final KafkaTemplate<String, Object> kafkaTemplate;
 
-	public UserProfileServiceImpl(UserProfileRepository userProfileRepository,
-			KafkaTemplate<String, Object> kafkaTemplate) {
+	public UserProfileServiceImpl(UserProfileRepository userProfileRepository
+			) {
 		this.userProfileRepository = userProfileRepository;
-		this.kafkaTemplate = kafkaTemplate;
+//		this.kafkaTemplate = kafkaTemplate;
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class UserProfileServiceImpl implements UserProfileService {
 		userProfileRepository.save(userProfile);
 
 		String message = "Registration successful for user: " + userProfile.getUsername();
-		kafkaTemplate.send(AppConstants.NASAAPP_REGISTRATION_TOPIC_NAME, message);
+//		kafkaTemplate.send(AppConstants.NASAAPP_REGISTRATION_TOPIC_NAME, message);
 		return new MessageResponse("User Registered Successfully!", HttpStatus.OK);
 	}
 
