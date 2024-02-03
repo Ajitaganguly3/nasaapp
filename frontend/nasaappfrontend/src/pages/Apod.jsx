@@ -8,7 +8,7 @@ function Apod() {
     const [apods, setApods] = useState([]);
     const [filterDate, setFilterDate] = useState("");
     const [explore, setExplore] = useState(false);
-    const username = localStorage.getItem("username")|| "defaultUsername";
+    const username = localStorage.getItem("username") || "defaultUsername";
     const token = JSON.parse(localStorage.getItem("successResponse"))?.token || "";
 
 
@@ -103,14 +103,13 @@ function Apod() {
 
     return (
         <ThemeProvider theme={theme}>
-            <div style={{ textAlign: "center", marginTop: "100px", marginBottom: "100px", padding: "0 20px" }}>
-                <h1> Welcome </h1>
-                <Typography variant="h5" gutterBottom>Astronomy Picture of the Day!</Typography>
+            <div style={{ textAlign: "center", marginTop: "110px", marginBottom: "100px", padding: "0 20px"}}>
+                <Typography variant="h5" gutterBottom style={{ fontWeight: "bold" }}>Image of the Day</Typography>
                 {explore ? (
 
                     <Grid container spacing={3} justifyContent="center">
-                        <Grid container spacing={3} justifyContent="center">
-                            <Grid item xs={12} sm={6} md={4} mt={10} mb={10}>
+                        <Grid container spacing={3} justifyContent="end">
+                            <Grid item xs={12} sm={6} md={4} mt={0} mb={10}>
                                 <TextField label="Filter By Date" type="date" value={filterDate}
                                     onChange={handleFilterChange} InputLabelProps={{ shrink: true }}
                                 />
@@ -140,30 +139,36 @@ function Apod() {
                         ))}
                     </Grid>
                 ) : (
-                    <Grid container spacing={3} justifyContent="center" mt={5}>
+                    <Grid container spacing={10} mt={0.1} justifyContent="flex-start">
                         {apods.length > 0 ? (
-                            <Grid item xs={12} sm={6} md={4} key={apods[0].date}>
-                                <Card>
-                                    <CardContent>
-                                        <img src={apods[0].url} alt={apods[0].title} style={{ maxWidth: "200px", height: "200px", objectFit: "cover" }} />
-                                        <Typography variant="h6" component="div">
-                                            {apods[0].title}
+                            <Grid container item xs={12} md={12} key={apods[0].date} justifyContent="space-between" >
+                                <Grid item xs={6} md={6} mt={2} style={{ maxWidth: "45%", marginBottom: "16px" }}>
+                                    <Typography variant="body1" style={{ maxWidth: "100%" }}>
+                                        {apods[0].explanation}
+                                    </Typography>
+                                    <Button variant="text" onClick={handleExploreClicked} style={{marginTop: "15px"}}>
+                                        <Typography variant="subtitle1" underline="always">
+                                            Browse Image Archive
                                         </Typography>
-                                    </CardContent>
-                                </Card>
+                                    </Button>
+                                </Grid>
+                                <Grid item xs={12} md={6} style={{ padding: "16px", maxWidth: "45%" }}>
+                                    <Card>
+                                        <CardContent>
+                                            <img src={apods[0].url} alt={apods[0].title} style={{ maxWidth: "100%", height: "400px", objectFit: "cover" }} />
+                                            <Typography variant="h6" component="div" style={{ marginTop: "16px" }}>
+                                                {apods[0].title}
+                                            </Typography>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+
+
                             </Grid>
                         ) : (
                             <Typography variant="body1">No APOD available</Typography>
                         )}
-                        <Grid item xs={12}>
-                            <Grid container justifyContent="center">
-                                <Button variant="text" onClick={handleExploreClicked}>
-                                    <Typography variant="subtitle1" underline="always">
-                                        Explore
-                                    </Typography>
-                                </Button>
-                            </Grid>
-                        </Grid>
+
                     </Grid>
                 )}
             </div>
