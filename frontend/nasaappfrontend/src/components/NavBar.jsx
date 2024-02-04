@@ -6,19 +6,28 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import { TextField, Autocomplete, MenuItem, Menu, Popover } from "@mui/material";
+import { TextField, Autocomplete, MenuItem, Menu, Popover, useTheme } from "@mui/material";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../redux/authSlice";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import axios from "axios";
+import _debounce from "lodash/debounce";
+import { values } from "lodash";
 
 export default function NavBar() {
     const [navOpen, setNavOpen] = useState(null);
     const [searchOpen, setSearchOpen] = useState(false);
     const [menuItems, setMenuItems] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
+    const [apodDetails, setApodDetails] = useState([]);
     const navigate = useNavigate();
-    const location = useLocation();
     const loggedIn = useSelector((state) => state.loggedIn);
     const dispatch = useDispatch();
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
 
     const toggleSearch = () => {
         setSearchOpen(!searchOpen);
@@ -34,13 +43,14 @@ export default function NavBar() {
 
     const handleSignOut = () => {
 
+        navigate("/");
         dispatch(actions.logout());
         setMenuItems([
             { label: "Sign In", path: "/login" },
             { label: "Sign Up", path: "/register" },
         ]);
 
-        navigate("/");
+
         console.log("signed out");
         console.log(loggedIn);
 
@@ -69,14 +79,14 @@ export default function NavBar() {
                     { label: "Explore", path: "/apod", onClick: handleExplore, },
                     { label: "Wishlist", path: "/wishlist" },
                     {
-                        label: "Sign Out", onClick: handleSignOut,
+                        label: "Sign Out", path: "/", onClick: handleSignOut,
                     },
                 ];
 
             } else {
                 console.log("loggedIn state:", loggedIn);
                 return [
-                    { label: "Sign In", path: "/login", onClick: handleLogin},
+                    { label: "Sign In", path: "/login", onClick: handleLogin },
                     { label: "Sign Up", path: "/register", onClick: handleRegister },
                 ];
             }
@@ -86,6 +96,66 @@ export default function NavBar() {
 
 
     }, [loggedIn, dispatch, navigate]);
+
+    const handleSearch = async (value) => {
+        setSearchTerm(value);
+
+        if (value.trim() === "") {
+            setSuggestions([]);
+            return;
+        }
+
+        try {
+            const response = await fetch(
+                `https://api.nasa.gov/planetary/apod?api_key=zhjoGExY6FeyM8buMcsnGj2fazcyfBeOzeH4dLBZ&start_date=2024-01-01`
+            );
+            const data = await response.json();
+
+            const titles = Array.isArray(data) ? data.map((entry) => entry.title) : [data.title];
+
+            const filteredSuggestions = titles
+                .filter((title) => title.toLowerCase().includes(value.toLowerCase()))
+                .slice(0, 5);
+
+            setSuggestions(filteredSuggestions);
+        } catch (error) {
+            console.error("Error fetching suggestions:", error);
+        }
+    };
+    const debouncedSearch = _debounce(handleSearch, 200);
+
+    const handleInputChange = (_, value) => {
+        debouncedSearch(value);
+    }
+
+    const handleSuggestionsClick = async (_, selectedTitle) => {
+        console.log("handleSuggestionsClick triggered with title:", selectedTitle);
+        if (selectedTitle) {
+            setSuggestions([]); // Clear suggestions immediately
+
+            try {
+                const response = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=zhjoGExY6FeyM8buMcsnGj2fazcyfBeOzeH4dLBZ&start_date=2024-01-01`);
+                const data = response.data;
+
+                const selectedEntry = data.find(entry => entry.title === selectedTitle);
+
+                if (selectedEntry) {
+                    const selectedDate = selectedEntry.date;
+                    const detailsURL = `/details/${selectedDate}`;
+                    console.log("Navigating to:", detailsURL);
+                    navigate(detailsURL);
+                    setSearchTerm("");
+                    setSearchOpen(false);
+                } else {
+                    console.error("Entry not found for title:", selectedTitle);
+                }
+            } catch (error) {
+                console.error("Error fetching APOD details for suggestions:", error);
+            }
+        }
+    };
+
+
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -136,13 +206,15 @@ export default function NavBar() {
                             alignItems: "center",
                         }}
                     >
-                        {searchOpen ? (
+                        {searchOpen && !isMobile ? (
                             <Autocomplete
-                                options={[]}
+                                options={suggestions}
                                 freeSolo
                                 open={searchOpen}
                                 onOpen={toggleSearch}
-                                onClose={toggleSearch}
+                                inputValue={searchTerm}
+                                onInputChange={handleInputChange}
+                                onChange={(event, value) => handleSuggestionsClick(event, value)}
                                 renderInput={(params) => (
                                     <TextField
                                         {...params}
@@ -180,6 +252,8 @@ export default function NavBar() {
                             </IconButton>
                         )}
                     </Box>
+
+
                     {menuItems.length > 0 && (
                         <Menu
                             anchorEl={navOpen}

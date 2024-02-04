@@ -3,14 +3,31 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { FavoriteBorder } from "@mui/icons-material";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import { Link, useNavigate } from "react-router-dom";
 
 function Apod() {
     const [apods, setApods] = useState([]);
     const [filterDate, setFilterDate] = useState("");
     const [explore, setExplore] = useState(false);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const navigate = useNavigate();
+
     const username = localStorage.getItem("username") || "defaultUsername";
     const token = JSON.parse(localStorage.getItem("successResponse"))?.token || "";
 
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setSnackbarOpen(false);
+    };
+
+    const handleSnackbarOpen = () => {
+        setSnackbarOpen(true);
+    };
 
     useEffect(() => {
         if (explore) {
@@ -33,8 +50,11 @@ function Apod() {
         },
     });
 
-    const handleExploreClicked = () => {
-        setExplore(true);
+    const handleExploreClicked = async () => {
+        setExplore((prevExplore) => !prevExplore);
+        if (!explore) {
+            await fetchAllApods();
+        }
     }
 
     const fetchAllApods = async () => {
@@ -95,38 +115,67 @@ function Apod() {
             await axios.post("http://localhost:9094/wishlist/add", wishlistItems,
                 { headers: { Authorization: `${token}` } });
             console.log("Added to wishlist successfully: ", apod.title);
+            handleSnackbarOpen();
         }
         catch (error) {
             console.error("Error adding to wishlist", error);
         }
     };
 
+    const handleImageClick = (apod) => {
+        navigate(`/details/${apod.date}`);
+        console.log("Redirecting to details page: ", apod.date);
+    };
+
+    const handleFavoriteIconClick = (apod) => {
+        handleAddToWishlist(apod);
+        handleSnackbarOpen();
+    }
+
     return (
         <ThemeProvider theme={theme}>
-            <div style={{ textAlign: "center", marginTop: "110px", marginBottom: "100px", padding: "0 20px"}}>
+            <div style={{ textAlign: "center", marginTop: "110px", marginBottom: "100px", padding: "0 20px" }}>
                 <Typography variant="h5" gutterBottom style={{ fontWeight: "bold" }}>Image of the Day</Typography>
                 {explore ? (
 
                     <Grid container spacing={3} justifyContent="center">
                         <Grid container spacing={3} justifyContent="end">
-                            <Grid item xs={12} sm={6} md={4} mt={0} mb={10}>
+                            <Grid item xs={12} sm={6} md={4} mt={8} mb={3}>
                                 <TextField label="Filter By Date" type="date" value={filterDate}
                                     onChange={handleFilterChange} InputLabelProps={{ shrink: true }}
                                 />
-                                <Button variant="contained" sx={{ ml: 2, bgcolor: "primary.main" }} onClick={handleFilterSubmit}>
+                                <Button variant="contained" sx={{ ml: 2, mt: 1, bgcolor: "primary.main" }} onClick={handleFilterSubmit}>
                                     Filter
                                 </Button>
                             </Grid>
                         </Grid>
                         {apods.map((apod) => (
                             <Grid item xs={12} sm={6} md={4} key={apod.date}>
-                                <Card>
+
+                                <Card style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)" }}>
                                     <CardContent style={{ position: "relative" }}>
-                                        <img src={apod.url} alt={apod.title} style={{ maxWidth: "100%", height: "300px", objectFit: "cover" }} />
+                                        <img src={apod.url} alt={apod.title} style={{ maxWidth: "100%", height: "300px", objectFit: "cover" }} onClick={() => handleImageClick(apod)} />
                                         <div style={{ position: "absolute", bottom: "5px", right: "2px" }}>
-                                            <IconButton style={{ color: "red" }} onClick={() => handleAddToWishlist(apod)}>
+                                            <IconButton style={{ color: "red" }} onClick={() => handleFavoriteIconClick(apod)}>
                                                 <FavoriteBorder />
                                             </IconButton>
+                                            <Snackbar
+
+                                                open={snackbarOpen}
+                                                autoHideDuration={6000}
+                                                onClose={handleSnackbarClose}
+
+                                            >
+                                                <Alert
+                                                    onClose={handleSnackbarClose}
+                                                    severity="success"
+                                                    variant="filled"
+                                                    sx={{ width: '100%' }}
+                                                >
+                                                    Successfully Added to the Wishlist
+                                                </Alert>
+
+                                            </Snackbar>
                                         </div>
                                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "8px" }}>
                                             <Typography variant="h7" component="div">
@@ -135,6 +184,8 @@ function Apod() {
                                         </div>
                                     </CardContent>
                                 </Card>
+
+
                             </Grid>
                         ))}
                     </Grid>
@@ -146,15 +197,15 @@ function Apod() {
                                     <Typography variant="body1" style={{ maxWidth: "100%" }}>
                                         {apods[0].explanation}
                                     </Typography>
-                                    <Button variant="text" onClick={handleExploreClicked} style={{marginTop: "15px"}}>
+                                    <Button variant="text" onClick={handleExploreClicked} style={{ marginTop: "15px" }}>
                                         <Typography variant="subtitle1" underline="always">
                                             Browse Image Archive
                                         </Typography>
                                     </Button>
                                 </Grid>
                                 <Grid item xs={12} md={6} style={{ padding: "16px", maxWidth: "45%" }}>
-                                    <Card>
-                                        <CardContent>
+                                    <Card style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)" }}>
+                                        <CardContent >
                                             <img src={apods[0].url} alt={apods[0].title} style={{ maxWidth: "100%", height: "400px", objectFit: "cover" }} />
                                             <Typography variant="h6" component="div" style={{ marginTop: "16px" }}>
                                                 {apods[0].title}

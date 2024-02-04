@@ -1,12 +1,91 @@
-.card-title{
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    padding: 8vh;
-    border-radius: 2vh;
-    z-index: 1;
-    text-align: start;
-    width: 50%;
+.home-container {
+    padding: 20px;
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
+
+/* Carousel styling */
+.carousel-wrapper {
+    width: 100%;
+}
+
+.carousel-slide {
+    position: relative;
+}
+
+.carousel-image {
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.carousel-heading {
+    position: absolute;
+    top: 20%;
+    left: 20px;
+    color: white;
+    text-align: left;
+    font-weight: bolder;
+    white-space: pre-line;
+}
+
+.learn-more-button {
+    position: absolute;
+    bottom: 40px;
+    left: 20px;
+    padding: 8px 16px;
+    background-color: #cb0d0d;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Featured News section */
+.featured-news-heading {
+    margin-top: 70px !important;
+    font-weight: bolder;
+}
+
+
+/* Featured Video section */
+.featured-video-container {
+    background-color: #242424;
+    margin-top: 80px;
+    padding: 32px;
+    color: white;
+}
+
+.featured-video-heading {
+    font-size: 16px;
+    margin-bottom: 10px !important;
+    color: gray;
+    display: block;
+}
+
+.featured-video-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 50px !important;
+}
+
+.featured-video-description {
+    color: #efeeeb;
+    margin-bottom: 16px;
+}
+
+.explore-mission-link {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.arrow-outward-icon {
+    font-size: 16px;
+    vertical-align: middle;
+    margin-left: 1px;
+    color: #cb0d0d;
+    transition: color 0.3s;
+} 

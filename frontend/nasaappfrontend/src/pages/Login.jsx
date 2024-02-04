@@ -17,6 +17,10 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 import { actions } from "../redux/authSlice";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import ErrorIcon from '@mui/icons-material/Error';
+
 
 function CustomizedTextField(props) {
     return (
@@ -57,13 +61,26 @@ const theme = createTheme({
 });
 
 
-
 export default function SignIn() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setSnackbarOpen(false);
+    };
+
+    const handleSnackbarOpen = () => {
+        setSnackbarOpen(true);
+    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -76,7 +93,7 @@ export default function SignIn() {
         };
 
         axios.post('http://localhost:9090/auth/authenticate', payload)
-            .then((response) => {
+            .then(async (response) => {
                 console.log(response.data);
                 setUsername('');
                 setPassword('');
@@ -86,8 +103,20 @@ export default function SignIn() {
                 const successResponse = localStorage.getItem("successResponse");
                 console.log(response.data.username);
                 console.log(successResponse);
-                dispatch(actions.login());
-                navigate("/", { state: { message: response.data.message, username: response.data.user } });
+
+                if (response.data.message) {
+                    dispatch(actions.login());
+                    handleSnackbarOpen();
+
+                    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+                    navigate("/", { state: { message: response.data.message, username: response.data.user } });
+                }
+                else {
+                    setErrorMessage("Wrong Password. Try again or click Forget password to reset it.")
+                    handleSnackbarOpen();
+                }
+
             })
             .catch((error) => {
                 if (error.response) {
@@ -100,7 +129,9 @@ export default function SignIn() {
                     console.log("Error", error.message);
                 }
                 console.error(error);
-                alert("Wrong credentials");
+                setErrorMessage("Wrong Password. Try again or click Forget password to reset it.")
+                
+
             });
     };
 
@@ -155,6 +186,14 @@ export default function SignIn() {
                             }}
                             autoComplete="current-password"
                         />
+                        {errorMessage && (
+                            <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
+                                <ErrorIcon color="error" sx={{ mr: 1 }} />
+                                <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                                    {errorMessage}
+                                </Typography>
+                            </Box>
+                        )}
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
                             label="Remember me" sx={{ color: "white" }}
@@ -167,6 +206,23 @@ export default function SignIn() {
                         >
                             Login
                         </Button>
+                        <Snackbar
+
+                            open={snackbarOpen}
+                            autoHideDuration={6000}
+                            onClose={handleSnackbarClose}
+
+                        >
+                            <Alert
+                                onClose={handleSnackbarClose}
+                                severity="success"
+                                variant="filled"
+                                sx={{ width: '100%' }}
+                            >
+                                Log In Successfull
+                            </Alert>
+
+                        </Snackbar>
                         <Grid container>
                             <Grid item xs>
                                 <Link
@@ -189,6 +245,7 @@ export default function SignIn() {
                         </Grid>
                     </Box>
                 </Box>
+
             </Container>
         </ThemeProvider>
     );

@@ -15,7 +15,14 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import ErrorIcon from '@mui/icons-material/Error';
+
+const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};
 
 function CustomizedTextField(props) {
     return (
@@ -63,12 +70,54 @@ export default function SignUp() {
     const [contactNumber, setContactNumber] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [errors, setErrors] = useState({
+        firstName: "",
+        lastName: "",
+        username: "",
+        email: "",
+        contactNumber: "",
+        password: "",
+        confirmPassword: "",
+    });
 
     const navigate = useNavigate();
 
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        setSnackbarOpen(false);
+    };
+
+    const handleSnackbarOpen = () => {
+        setSnackbarOpen(true);
+    };
+
+    const validateForm = () => {
+        const newErrors = {
+            firstName: firstName === "" ? "First Name is required" : "",
+            lastName: lastName === "" ? "Last Name is required" : "",
+            username: username === "" ? "Username is required" : "",
+            email: validateEmail(email) ? "" : "Invalid email format",
+            contactNumber: contactNumber === "" ? "Contact Number is required" : "",
+            password: password === "" ? "Password is required" : "",
+            confirmPassword:
+                confirmPassword === password ? "" : "Passwords do not match",
+        };
+
+        setErrors(newErrors);
+
+        return Object.values(newErrors).every((error) => error === "");
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (!validateForm()) {
+            // Form is not valid, do not proceed with submission
+            return;
+        }
 
         const payload = {
             firstName: firstName,
@@ -78,11 +127,10 @@ export default function SignUp() {
             contactNumber: contactNumber,
             password: password,
             confirmPassword: confirmPassword,
-
         };
 
         axios.post('http://localhost:8083/user/register', payload)
-            .then((response) => {
+            .then(async (response) => {
                 console.log(response.data);
                 setUsername('');
                 setFirstName('');
@@ -92,7 +140,8 @@ export default function SignUp() {
                 setPassword('');
                 setConfirmPassword('');
 
-
+                handleSnackbarOpen();
+                await new Promise((resolve) => setTimeout(resolve, 3000));
                 navigate("/login");
             })
             .catch((error) => {
@@ -106,7 +155,6 @@ export default function SignUp() {
                     console.log("Error", error.message);
                 }
                 console.error(error);
-                alert("username already exist or password validation failed");
             });
     };
 
@@ -145,11 +193,19 @@ export default function SignUp() {
                                     label="First Name"
                                     value={firstName}
                                     onChange={(event) => {
-                                        setFirstName(event.target.value)
+                                        setFirstName(event.target.value);
+                                        setErrors((prevErrors) => ({ ...prevErrors, firstName: "" }));
                                     }}
+
                                     autoFocus
                                 />
+                                {errors.firstName && (
+                                    <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                                        {errors.firstName}
+                                    </Typography>
+                                )}
                             </Grid>
+
                             <Grid item xs={12} sm={6}>
                                 <CustomizedTextField
                                     required
@@ -159,10 +215,16 @@ export default function SignUp() {
                                     name="lastName"
                                     value={lastName}
                                     onChange={(event) => {
-                                        setLastName(event.target.value)
+                                        setLastName(event.target.value);
+                                        setErrors((prevErrors) => ({ ...prevErrors, lastName: "" }));
                                     }}
                                     autoComplete="family-name"
                                 />
+                                {errors.lastName && (
+                                    <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                                        {errors.lastName}
+                                    </Typography>
+                                )}
                             </Grid>
 
                             <Grid item xs={12}>
@@ -174,10 +236,16 @@ export default function SignUp() {
                                     name="email"
                                     value={email}
                                     onChange={(event) => {
-                                        setEmail(event.target.value)
+                                        setEmail(event.target.value);
+                                        setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
                                     }}
                                     autoComplete="email"
                                 />
+                                {errors.email && (
+                                    <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                                        {errors.email}
+                                    </Typography>
+                                )}
                             </Grid>
                             <Grid item xs={12}>
                                 <CustomizedTextField
@@ -187,10 +255,16 @@ export default function SignUp() {
                                     label="Username"
                                     value={username}
                                     onChange={(event) => {
-                                        setUsername(event.target.value)
+                                        setUsername(event.target.value);
+                                        setErrors((prevErrors) => ({ ...prevErrors, username: "" }));
                                     }}
                                     name="username"
                                 />
+                                {errors.username && (
+                                    <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                                        {errors.username}
+                                    </Typography>
+                                )}
                             </Grid>
                             <Grid item xs={12}>
                                 <CustomizedTextField
@@ -200,10 +274,16 @@ export default function SignUp() {
                                     label="Contact Number"
                                     value={contactNumber}
                                     onChange={(event) => {
-                                        setContactNumber(event.target.value)
+                                        setContactNumber(event.target.value);
+                                        setErrors((prevErrors) => ({ ...prevErrors, contactNumber: "" }));
                                     }}
                                     name="contactNumber"
                                 />
+                                {errors.contactNumber && (
+                                    <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                                        {errors.contactNumber}
+                                    </Typography>
+                                )}
                             </Grid>
                             <Grid item xs={12}>
                                 <CustomizedTextField
@@ -215,10 +295,16 @@ export default function SignUp() {
                                     id="password"
                                     value={password}
                                     onChange={(event) => {
-                                        setPassword(event.target.value)
+                                        setPassword(event.target.value);
+                                        setErrors((prevErrors) => ({ ...prevErrors, password: "" }));
                                     }}
                                     autoComplete="new-password"
                                 />
+                                {errors.password && (
+                                    <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                                        {errors.password}
+                                    </Typography>
+                                )}
                             </Grid>
                             <Grid item xs={12}>
                                 <CustomizedTextField
@@ -230,10 +316,16 @@ export default function SignUp() {
                                     id="confirmPassword"
                                     value={confirmPassword}
                                     onChange={(event) => {
-                                        setConfirmPassword(event.target.value)
+                                        setConfirmPassword(event.target.value);
+                                        setErrors((prevErrors) => ({ ...prevErrors, confirmPassword: "" }));
                                     }}
                                     autoComplete="new-password"
                                 />
+                                {errors.confirmPassword && (
+                                    <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+                                        {errors.confirmPassword}
+                                    </Typography>
+                                )}
                             </Grid>
 
                             <Grid item xs={12}>
@@ -250,6 +342,7 @@ export default function SignUp() {
                                 />
                             </Grid>
                         </Grid>
+
                         <Button
                             type="submit"
                             fullWidth
@@ -288,6 +381,20 @@ export default function SignUp() {
                     {new Date().getFullYear()}
                     {"."}
                 </Typography>
+                <Snackbar
+                    open={snackbarOpen}
+                    autoHideDuration={6000}
+                    onClose={handleSnackbarClose}
+                >
+                    <Alert
+                        onClose={handleSnackbarClose}
+                        severity="success"
+                        variant="filled"
+                        sx={{ width: '100%' }}
+                    >
+                        Successfully Registered!
+                    </Alert>
+                </Snackbar>
             </Container>
         </ThemeProvider>
     );

@@ -2,15 +2,30 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Card, CardContent, Grid, Typography, IconButton, Menu, MenuItem } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Apod from "./Apod";  // Adjust the import path based on your project structure
-import Login from "./Login";  // Adjust the import path based on your project structure
+import Apod from "./Apod";
+import Login from "./Login";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 function Wishlist() {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
   const username = localStorage.getItem("username") || "defaultUsername";
   const token = JSON.parse(localStorage.getItem("successResponse"))?.token || "";
+
+
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbarOpen(false);
+  };
+
+  const handleSnackbarOpen = () => {
+    setSnackbarOpen(true);
+  };
 
   useEffect(() => {
     fetchWishlistItems();
@@ -21,7 +36,9 @@ function Wishlist() {
       const response = await axios.get(`http://localhost:9094/wishlist/all/${username}`, {
         headers: { Authorization: `${token}` },
       });
-      setWishlistItems(response.data);
+
+      const wishListAddedDate = response.data.map((item) => ({ ...item, addedDate: new Date(), }));
+      setWishlistItems(wishListAddedDate);
     } catch (error) {
       console.error("Error fetching wishlist items", error);
     }
@@ -51,6 +68,7 @@ function Wishlist() {
         fetchWishlistItems();
       }
       handleCloseMenu();
+      handleSnackbarOpen();
     } catch (error) {
       console.error("Error deleting item from the wishlist", error);
     }
@@ -65,7 +83,7 @@ function Wishlist() {
             {wishlistItems.length > 0 ? (
               wishlistItems.map((item) => (
                 <Grid item xs={12} sm={6} md={4} key={item.date}>
-                  <Card>
+                  <Card style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)" }}>
                     <CardContent style={{ position: "relative" }}>
                       <img
                         src={item.url}
@@ -90,6 +108,23 @@ function Wishlist() {
                         >
                           <MenuItem onClick={handleDeleteItem}>Delete</MenuItem>
                         </Menu>
+                        <Snackbar
+
+                          open={snackbarOpen}
+                          autoHideDuration={6000}
+                          onClose={handleSnackbarClose}
+
+                        >
+                          <Alert
+                            onClose={handleSnackbarClose}
+                            severity="success"
+                            variant="filled"
+                            sx={{ width: '100%' }}
+                          >
+                            Successfully Deleted from the Wishlist
+                          </Alert>
+
+                        </Snackbar>
                       </div>
                       <div style={{ justifyContent: "space-between", alignItems: "center", marginTop: "8px" }}>
                         <Typography variant="h7" component="div">
@@ -111,7 +146,7 @@ function Wishlist() {
       ) : (
         <Login />
       )}
-        {/* Render Apod component */}
+      {/* Render Apod component */}
     </div>
   );
 }

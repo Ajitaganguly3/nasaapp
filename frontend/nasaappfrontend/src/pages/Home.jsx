@@ -3,16 +3,12 @@ import { Box, Grid, Typography } from "@mui/material";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { carouselImages } from "../components/CarouselImages";
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-
-import ".//Home.css";
 import YouTube from "react-youtube";
-import { ArrowForward, ArrowOutward } from "@mui/icons-material";
+import FeaturedNewsCard from "../components/FeaturedNewsCard";// Import the FeaturedNewsCard component
+import { ArrowOutward } from "@mui/icons-material";
+import "./Home.css"; // Import the CSS file
 
 const Home = () => {
-
     const getCarouselHeading = (index) => {
         switch (index) {
             case 0:
@@ -29,8 +25,9 @@ const Home = () => {
     };
 
     return (
-        <Box sx={{ p: 2, mt: 8, mb: 8 }}>
+        <Box className="home-container">
             <Carousel
+                className="carousel-wrapper"
                 showThumbs={false}
                 autoPlay={true}
                 interval={5000}
@@ -38,123 +35,65 @@ const Home = () => {
                 showStatus={false}
                 showIndicators={true}
                 showArrows={false}
-                style={{ width: "100%" }}
             >
-                {carouselImages
-                    .slice(0, 4).map((image, index) => (
-                        <div key={image.id} style={{ position: "relative" }}>
-
-                            <img
-                                src={image.hdurl}
-                                alt={image.title}
-                                style={{
-                                    width: "100%",
-                                    height: "auto",
-                                    maxHeight: "500px",
-                                    objectFit: "cover",
-                                    borderRadius: "4px",
-
-                                }}
-
-                            />
-                            <div style={{ position: "absolute", top: "20%", left: "20px", color: "white", textAlign: "left" }}>
-                                <Typography variant="h2" color="inherit" gutterBottom style={{ fontWeight: "bolder", whiteSpace: "pre-line" }}>
-                                    {getCarouselHeading(index)}
-                                </Typography>
-
-                            </div>
-
-                            <button
-                                style={{
-                                    position: "absolute",
-                                    bottom: "40px",
-                                    left: "20px",
-                                    padding: "8px 16px",
-                                    backgroundColor: "#cb0d0d",
-                                    borderRadius: "4px",
-                                    fontWeight: "bold",
-                                    cursor: "pointer",
-                                }}
-                            >
-                                Learn More
-                            </button>
+                {carouselImages.slice(0, 4).map((image, index) => (
+                    <div key={image.id} className="carousel-slide">
+                        <img
+                            src={image.hdurl}
+                            alt={image.title}
+                            className="carousel-image"
+                        />
+                        <div className="carousel-heading">
+                            <Typography variant="h2" color="inherit" gutterBottom style={{ fontWeight: "bolder", whiteSpace: "pre-line" }}>
+                                {getCarouselHeading(index)}
+                            </Typography>
                         </div>
-                    ))}
+                        <button className="learn-more-button">
+                            Learn More
+                        </button>
+                    </div>
+                ))}
             </Carousel>
-            <Typography variant="h2" gutterBottom mt={10} style={{ fontWeight: "bolder" }}>
+
+            <Typography variant="h2" className="featured-news-heading" gutterBottom style={{ fontWeight: "bolder" }}>
                 Featured News
             </Typography>
-            <Grid container spacing={2}>
-                <Grid item xs={12} sm={6} md={4}>
-                    <Card sx={{ maxWidth: 650, height: "100%", position: "relative" }}>
-                        <CardMedia
-                            component="img"
-                            height="350"
-                            src="https://www.nasa.gov/wp-content/uploads/2024/01/cygnus-advisory-2024.jpg"
-                            alt="Featured News"
 
-                        >
-
-                        </CardMedia>
-                        <CardContent>
-
-                            <Typography variant="body1" color="text.secondary">
-                                NASA Sets Coverage for Northrop  Grumman Cargo Space Station Mission
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                    <Card sx={{ maxWidth: 650, height: "100%" }}>
-                        <CardMedia
-                            component="img"
-                            height="350"
-                            src="https://apod.nasa.gov/apod/image/2308/PIA25969_Ingenuity.jpg"
-                            alt="Featured Article"
-                        />
-                        <CardContent>
-
-                            <Typography variant="body1" color="text.secondary">
-                                Landing on Mars: A Tricky Feat!
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                    <Card sx={{ maxWidth: 650, height: "100%" }}>
-                        <CardMedia
-                            component="img"
-                            height="350"
-                            src="https://www.nasa.gov/wp-content/uploads/2024/01/ksc-20231204-ph-kls01-0027large.jpg"
-                            alt="Featured Article"
-                        />
-                        <CardContent>
-
-                            <Typography variant="body1" color="text.secondary">
-                                NASA Sets Coverage for Ocean, Atmosphere, Climate Mission
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                </Grid>
+            <Grid container spacing={2} mt={5}>
+                <FeaturedNewsCard
+                    imageSrc="https://www.nasa.gov/wp-content/uploads/2024/01/cygnus-advisory-2024.jpg"
+                    altText="NASA Sets Coverage for Northrop Grumman Cargo Space Station Mission"
+                    cardText="NASA Sets Coverage for Northrop Grumman Cargo Space Station Mission"
+                />
+                <FeaturedNewsCard
+                    imageSrc="https://apod.nasa.gov/apod/image/2308/PIA25969_Ingenuity.jpg"
+                    altText="Landing on Mars: A Tricky Feat!"
+                    cardText="Landing on Mars: A Tricky Feat!"
+                />
+                <FeaturedNewsCard
+                    imageSrc="https://www.nasa.gov/wp-content/uploads/2024/01/ksc-20231204-ph-kls01-0027large.jpg"
+                    altText="NASA Sets Coverage for Ocean, Atmosphere, Climate Mission"
+                    cardText="NASA Sets Coverage for Ocean, Atmosphere, Climate Mission"
+                />
             </Grid>
-            <Box sx={{ backgroundColor: "#242424", mt: 8, p: 4, color: "white" }}>
-                <Typography variant="body1" gutterBottom sx={{ color: "gray" }}>
+
+            <Box className="featured-video-container">
+                <Typography variant="body1" gutterBottom className="featured-video-heading">
                     FEATURED VIDEO
                 </Typography>
                 <Grid container spacing={4}>
                     <Grid item xs={12} md={4}>
-                        <Typography variant="h4" gutterBottom sx={{ mt: 8 }} style={{fontWeight: "bold"}}>
+                        <Typography variant="h4" gutterBottom className="featured-video-title">
                             What Color is the Ocean?
                         </Typography>
-                        <Typography variant="body2" paragraph style={{color: "#efeeeb"}}>
+                        <Typography variant="body2" paragraph className="featured-video-description">
                             The color of our oceans, lakes, and rivers can tell us a lot about what’s going on just beneath the surface.
                             With the new hyperspectral capabilities of the Plankton, Aerosol, Cloud, and Ocean Ecosystem (PACE) mission, we’ll know more about the health of aquatic ecosystems and their impacts on human health and climate studies.
-
                         </Typography>
                         <Typography variant="body1">
-                            <a href="https://pace.gsfc.nasa.gov/" target="_blank" rel="noopener" style={{ color: "white", textDecoration: "none", display: "inline-block", fontWeight: "bold" }}>
+                            <a href="https://pace.gsfc.nasa.gov/" target="_blank" rel="noopener" className="explore-mission-link">
                                 Explore the Mission
-                                <ArrowOutward sx={{ fontSize: 16, verticalAlign: "middle", marginLeft: 1, color: "#cb0d0d", transition: "color 0.3s", }} />
+                                <ArrowOutward className="arrow-outward-icon" />
                             </a>
                         </Typography>
                     </Grid>
@@ -163,14 +102,10 @@ const Home = () => {
                             videoId="VwVL0UBVVLA"
                             opts={{ width: "100%", height: "500" }}
                         />
-
                     </Grid>
                 </Grid>
-
             </Box>
-
         </Box>
-
     );
 };
 

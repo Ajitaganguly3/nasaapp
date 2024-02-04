@@ -1,0 +1,32 @@
+.card-wrapper {
+    position: relative;
+    max-width: 650px;
+    height: 100%;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.card-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 100px 20px rgba(0, 0, 0, 0.8);
+
+
+}
+
+.card-media {
+    
+    overflow: hidden;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 8px;
+    color: white;
+}
