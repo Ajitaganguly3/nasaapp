@@ -1,22 +1,14 @@
+/* Default styles for larger screens */
 .home-container {
     padding: 20px;
-    margin-top: 80px;
+    margin-top: 100px;
     margin-bottom: 80px;
 }
 
-/* Carousel styling */
-.carousel-wrapper {
-    width: 100%;
-}
-
-.carousel-slide {
-    position: relative;
-}
-
 .carousel-image {
-    width: 100%;
-    height: auto;
-    max-height: 500px;
+    width: 100% !important;
+    height: 500px;
+    max-height: 100% !important;
     object-fit: cover;
     border-radius: 4px;
 }
@@ -25,6 +17,8 @@
     position: absolute;
     top: 20%;
     left: 20px;
+    right: 20px;
+    bottom: 40px;
     color: white;
     text-align: left;
     font-weight: bolder;
@@ -33,13 +27,18 @@
 
 .learn-more-button {
     position: absolute;
-    bottom: 40px;
+    bottom: 50px;
     left: 20px;
     padding: 8px 16px;
     background-color: #cb0d0d;
     border-radius: 4px;
     font-weight: bold;
     cursor: pointer;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 
 /* Featured News section */
@@ -88,4 +87,44 @@
     margin-left: 1px;
     color: #cb0d0d;
     transition: color 0.3s;
-} 
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+    .home-container {
+        padding: 10px;
+        margin-top: 100px;
+        margin-bottom: 40px;
+    }
+
+    .carousel-heading {
+        top: 10%;
+    }
+
+    .learn-more-button {
+        bottom: 20px;
+    }
+
+
+
+}
+
+/* Media queries for even smaller screens */
+@media (max-width: 480px) {
+    .home-container {
+        padding: 10px;
+        margin-top: 100px;
+        margin-bottom: 40px;
+    }
+
+    .carousel-heading {
+        top: 10%;
+    }
+
+    .learn-more-button {
+        bottom: 30px;
+    }
+
+
+    /* Add more styles for even smaller screens as needed */
+}

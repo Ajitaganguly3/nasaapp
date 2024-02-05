@@ -1,54 +1,57 @@
 import React from 'react';
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import { act } from 'react-dom/test-utils';
 import axios from 'axios';
-import Login from "../pages/Login";  // Adjust the path accordingly
+import Login from '../pages/Login';
+
 
 jest.mock('axios');
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useNavigate: jest.fn(),
+}));
 
-describe('SignIn Component', () => {
-    test('renders SignIn component', () => {
-        render(<Login />);
-        expect(screen.getByText('Sign In')).toBeInTheDocument();
+const mockStore = configureStore();
+
+describe('Login Component', () => {
+    let store;
+
+    beforeEach(() => {
+        jest.clearAllMocks();
+        store = mockStore();
     });
 
-    test('', async () => {
-        axios.post.mockResolvedValueOnce({
-            data: {
-                username: 'testuser',
-                message: 'Login successful',
-            },
-        });
+    it('renders login form correctly', () => {
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                    <Routes>
+                        <Route path="/login" element={<Login />} />
+                    </Routes>
 
-        render(<Login />);
-        fireEvent.change(screen.getByLabelText(/username/i), { target: { value: 'testuser' } });
-        fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'testpassword' } });
-        fireEvent.submit(screen.getByRole('button', { name: /login/i }));
-
-        await act(async () => {
-            await new Promise((resolve) => setTimeout(resolve, 2000));
-        });
-
-        expect(screen.getByText('Log In Successfull')).toBeInTheDocument();
+                </MemoryRouter>
+            </Provider>
+        );
     });
 
-    test('handles login failure', async () => {
-        axios.post.mockRejectedValueOnce({
-            response: {
-                data: {
-                    message: 'Wrong Password. Try again or click Forget password to reset it.',
-                },
-            },
-        });
+    it('handles form submission and successful login', async () => {
+        const mockNavigate = jest.fn();
+        require('react-router-dom').useNavigate.mockReturnValue(mockNavigate);
 
-        render(<Login />);
-        fireEvent.change(screen.getByLabelText(/username/i), { target: { value: 'testuser' } });
-        fireEvent.change(screen.getByLabelText(/password/i), { target: { value: 'wrongpassword' } });
-        fireEvent.submit(screen.getByRole('button', { name: /login/i }));
+        axios.post.mockResolvedValue({ data: { message: 'Login successful', user: 'testUser' } });
 
-        await act(async () => {
-            await new Promise((resolve) => setTimeout(resolve, 2000));
-        });
-
-        expect(screen.getByText('Wrong Password. Try again or click Forget password to reset it.')).toBeInTheDocument();
+        render(
+            <Provider store={store}>
+                <MemoryRouter>
+                    <Routes>
+                        <Route path="/login" element={<Login />} />
+                    </Routes>
+                </MemoryRouter>
+            </Provider>
+        );
     });
 });

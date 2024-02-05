@@ -190,10 +190,21 @@ function Apod() {
                         ))}
                     </Grid>
                 ) : (
-                    <Grid container spacing={10} mt={0.1} justifyContent="flex-start">
+                    <Grid container spacing={10} mt={0.1} justifyContent="center">
+                       
                         {apods.length > 0 ? (
-                            <Grid container item xs={12} md={12} key={apods[0].date} justifyContent="space-between" >
-                                <Grid item xs={6} md={6} mt={2} style={{ maxWidth: "45%", marginBottom: "16px" }}>
+                            <>
+                                <Grid item xs={12} md={6} mt={5} style={{ padding: "16px", maxWidth: "100%" , marginLeft: "70px"}}>
+                                    <Card style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)" }}>
+                                        <CardContent>
+                                            <img src={apods[0].url} alt={apods[0].title} style={{ maxWidth: "100%", height: "400px", objectFit: "cover" }} />
+                                            <Typography variant="h5" component="div" style={{ marginTop: "16px" }}>
+                                                {apods[0].title}
+                                            </Typography>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
+                                <Grid item xs={12} md={6} mt={2} style={{ maxWidth: "100%", marginBottom: "16px" }}>
                                     <Typography variant="body1" style={{ maxWidth: "100%" }}>
                                         {apods[0].explanation}
                                     </Typography>
@@ -203,24 +214,12 @@ function Apod() {
                                         </Typography>
                                     </Button>
                                 </Grid>
-                                <Grid item xs={12} md={6} style={{ padding: "16px", maxWidth: "45%" }}>
-                                    <Card style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)" }}>
-                                        <CardContent >
-                                            <img src={apods[0].url} alt={apods[0].title} style={{ maxWidth: "100%", height: "400px", objectFit: "cover" }} />
-                                            <Typography variant="h6" component="div" style={{ marginTop: "16px" }}>
-                                                {apods[0].title}
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-
-
-                            </Grid>
+                            </>
                         ) : (
                             <Typography variant="body1">No APOD available</Typography>
                         )}
-
                     </Grid>
+
                 )}
             </div>
         </ThemeProvider>

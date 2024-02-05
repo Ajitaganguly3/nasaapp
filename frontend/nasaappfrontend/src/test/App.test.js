@@ -1,23 +1,35 @@
-import { render, screen } from "@testing-library/react";
-import App from "./App";
-import configureStore from "redux-mock-store";
-import { Provider } from "react-redux";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { Provider } from 'react-redux';
+import configureStore from 'redux-mock-store';
+import App from '../App';
 
 
-jest.mock("./store/login-slice");
-const mockStore = configureStore([]);
+jest.mock("../redux/authSlice");
+const mockStore = configureStore();
 
-describe("App Component", () => {
-  let store;
-  beforeEach(() => {
-    store = mockStore({
-      isLoggedIn: false,
-    });
-  });
+test('renders learn react link', () => {
 
-  test("renders learn react link", () => {
-    render(<Provider store={store}><App /></Provider>);
-    const linkElement = screen.getAllByText(/NasaApp/i)[0];
-    expect(linkElement).toBeInTheDocument();
-  });
+  const initialState = {
+    auth: {
+      loggedIn: true,
+    },
+
+  };
+
+
+  const store = mockStore(initialState);
+
+
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
+
+
+  const linkElement = screen.getAllByText(/NasaApp/i)[0];
+  expect(linkElement).toBeInTheDocument();
 });
+

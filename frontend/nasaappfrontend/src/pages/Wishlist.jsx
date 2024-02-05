@@ -146,7 +146,7 @@ function Wishlist() {
       ) : (
         <Login />
       )}
-      {/* Render Apod component */}
+
     </div>
   );
 }

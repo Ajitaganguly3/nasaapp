@@ -4,9 +4,9 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { carouselImages } from "../components/CarouselImages";
 import YouTube from "react-youtube";
-import FeaturedNewsCard from "../components/FeaturedNewsCard";// Import the FeaturedNewsCard component
+import FeaturedNewsCard from "../components/FeaturedNewsCard";
 import { ArrowOutward } from "@mui/icons-material";
-import "./Home.css"; // Import the CSS file
+import "./Home.css"; 
 
 const Home = () => {
     const getCarouselHeading = (index) => {
@@ -44,7 +44,7 @@ const Home = () => {
                             className="carousel-image"
                         />
                         <div className="carousel-heading">
-                            <Typography variant="h2" color="inherit" gutterBottom style={{ fontWeight: "bolder", whiteSpace: "pre-line" }}>
+                            <Typography variant="h2" >
                                 {getCarouselHeading(index)}
                             </Typography>
                         </div>
