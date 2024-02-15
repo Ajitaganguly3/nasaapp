@@ -1,24 +1,24 @@
 /* Default styles for larger screens */
 .home-container {
-    padding: 20px;
-    margin-top: 100px;
-    margin-bottom: 80px;
+    padding: 3vh !important;
+    margin-top: 4em !important;
+    margin-bottom: 10vh !important;
 }
 
 .carousel-image {
     width: 100% !important;
-    height: 500px;
+    height: 32rem !important;
     max-height: 100% !important;
-    object-fit: cover;
-    border-radius: 4px;
+    object-fit: cover !important;
+    border-radius: 4vh !important;
 }
 
 .carousel-heading {
     position: absolute;
-    top: 20%;
-    left: 20px;
-    right: 20px;
-    bottom: 40px;
+    top: 5rem !important;
+    left: 5vh;
+    right: 20vh;
+    bottom: 100vh !important;
     color: white;
     text-align: left;
     font-weight: bolder;
@@ -27,23 +27,23 @@
 
 .learn-more-button {
     position: absolute;
-    bottom: 50px;
-    left: 20px;
-    padding: 8px 16px;
+    bottom: 3em !important;
+    left: 5vh !important;
+    padding: 1.5vh 2vh;
     background-color: #cb0d0d;
-    border-radius: 4px;
+    border-radius: 1.5vh;
     font-weight: bold;
     cursor: pointer;
     max-width: 80%;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis !important;
 
 }
 
 /* Featured News section */
 .featured-news-heading {
-    margin-top: 70px !important;
+    margin-top: 20vh !important;
     font-weight: bolder;
 }
 
@@ -51,27 +51,27 @@
 /* Featured Video section */
 .featured-video-container {
     background-color: #242424;
-    margin-top: 80px;
-    padding: 32px;
+    margin-top: 5rem;
+    padding: 3rem;
     color: white;
 }
 
 .featured-video-heading {
-    font-size: 16px;
-    margin-bottom: 10px !important;
+    font-size: 1.2rem !important;
+    margin-bottom: 2rem !important;
     color: gray;
     display: block;
 }
 
 .featured-video-title {
-    font-size: 24px;
+    font-size: 2.5rem !important;
     font-weight: bold;
-    margin-top: 50px !important;
+    margin-top: 3rem !important;
 }
 
 .featured-video-description {
     color: #efeeeb;
-    margin-bottom: 16px;
+    margin-bottom: 4rem !important;
 }
 
 .explore-mission-link {
@@ -82,11 +82,11 @@
 }
 
 .arrow-outward-icon {
-    font-size: 16px;
+    font-size: 1.5rem !important;
     vertical-align: middle;
-    margin-left: 1px;
+    margin-left: 0.2rem;
     color: #cb0d0d;
-    transition: color 0.3s;
+    transition: color 0.5s;
 }
 
 /* Media queries for smaller screens */
