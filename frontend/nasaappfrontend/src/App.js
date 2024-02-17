@@ -6,6 +6,8 @@ import AuthRoutes from "./routes/AuthRoutes";
 import UnAuthRoutes from "./routes/UnAuthRoutes";
 import Details from "./pages/Details";
 import { useSelector } from "react-redux";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
 
 const App = () => {
   const loggedIn = useSelector((state) => state.loggedIn);
@@ -15,12 +17,13 @@ const App = () => {
       <Routes>
         {loggedIn ? (
           <React.Fragment>
-            <Route element={<Navigate to="/" />} />
+
+            <Route key="Home" path="/" element={<Home />}></Route>
             {AuthRoutes}
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Route element={<Navigate to="/login" />} />
+            <Route key="Login" path="/login" element={<Login />} ></Route>
             {UnAuthRoutes}
           </React.Fragment>
         )}
