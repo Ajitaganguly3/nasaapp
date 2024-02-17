@@ -134,8 +134,8 @@ function Apod() {
 
     return (
         <ThemeProvider theme={theme}>
-            <div style={{ textAlign: "center", marginTop: "110px", marginBottom: "100px", padding: "0 20px" }}>
-                <Typography variant="h5" gutterBottom style={{ fontWeight: "bold" }}>Image of the Day</Typography>
+            <div style={{ textAlign: "center", marginTop: "8rem", marginBottom: "8rem", padding: "0 2rem" }}>
+                <Typography variant="h4" gutterBottom style={{ fontWeight: "bold" }}>Image of the Day</Typography>
                 {explore ? (
 
                     <Grid container spacing={3} justifyContent="center">
@@ -194,21 +194,21 @@ function Apod() {
                        
                         {apods.length > 0 ? (
                             <>
-                                <Grid item xs={12} md={6} mt={5} style={{ padding: "16px", maxWidth: "100%" , marginLeft: "70px"}}>
-                                    <Card style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)" }}>
+                                <Grid item xs={12} md={6} mt={5} style={{ padding: "0.1rem", maxWidth: "100rem" , marginLeft: "5rem"}}>
+                                    <Card style={{ boxShadow: "0 1rem 2rem rgba(0, 0, 0, 0.8)" }}>
                                         <CardContent>
-                                            <img src={apods[0].url} alt={apods[0].title} style={{ maxWidth: "100%", height: "400px", objectFit: "cover" }} />
-                                            <Typography variant="h5" component="div" style={{ marginTop: "16px" }}>
+                                            <img src={apods[0].url} alt={apods[0].title} style={{ maxWidth: "100%", height: "50%", objectFit: "contain" }} />
+                                            <Typography variant="h5" component="div" style={{ marginTop: "3rem" }}>
                                                 {apods[0].title}
                                             </Typography>
                                         </CardContent>
                                     </Card>
                                 </Grid>
-                                <Grid item xs={12} md={6} mt={2} style={{ maxWidth: "100%", marginBottom: "16px" }}>
+                                <Grid item xs={12}  mt={2} style={{ maxWidth: "100%", marginBottom: "3rem" }}>
                                     <Typography variant="body1" style={{ maxWidth: "100%" }}>
                                         {apods[0].explanation}
                                     </Typography>
-                                    <Button variant="text" onClick={handleExploreClicked} style={{ marginTop: "15px" }}>
+                                    <Button variant="text" onClick={handleExploreClicked} style={{ marginTop: "2rem" }}>
                                         <Typography variant="subtitle1" underline="always">
                                             Browse Image Archive
                                         </Typography>

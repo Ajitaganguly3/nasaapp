@@ -75,27 +75,29 @@ function Wishlist() {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px", padding: "0 20px" }}>
+    <div style={{ textAlign: "center", marginTop: "8rem", padding: "0 0.5rem" }}>
       {token ? (
         <>
-          <h2 style={{ textAlign: "initial" }}>My Wishlist</h2>
+          <h2 style={{ textAlign: "initial", marginBottom: "4rem" }}>My Wishlist</h2>
           <Grid container spacing={3} mb={5} justifyContent="center">
             {wishlistItems.length > 0 ? (
               wishlistItems.map((item) => (
                 <Grid item xs={12} sm={6} md={4} key={item.date}>
-                  <Card style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.8)" }}>
-                    <CardContent style={{ position: "relative" }}>
+                  <Card style={{ boxShadow: "0 1rem 1.5rem rgba(0, 0, 0, 0.8)" }}>
+                    <CardContent style={{ position: "relative", margin: "1rem" }}>
                       <img
                         src={item.url}
                         alt={item.title}
-                        style={{ maxWidth: "300px", height: "300px", objectFit: "cover" }}
+                        style={{ maxWidth: "100%", height: "20rem", objectFit: "cover", }}
                       />
-                      <div style={{ position: "absolute", top: "5px", right: "5px" }}>
+                      <div style={{ zIndex: 1, position: "absolute", top: "0.1rem", right: "-1rem" }}>
                         <IconButton
                           aria-label="more"
                           aria-controls="wishlist-menu"
                           aria-haspopup="true"
                           onClick={(e) => handleOpenMenu(e, item)}
+
+
                         >
                           <MoreVertIcon />
                         </IconButton>

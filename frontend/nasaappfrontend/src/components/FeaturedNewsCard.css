@@ -27,6 +27,7 @@
     position: absolute;
     bottom: 0;
     width: 100%;
-    padding: 8px;
+   margin-right: 2vh !important;
+    padding: 2vh !important;
     color: white;
 }
