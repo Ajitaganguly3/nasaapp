@@ -33,7 +33,7 @@ function Wishlist() {
 
   const fetchWishlistItems = async () => {
     try {
-      const response = await axios.get(`http://localhost:9094/wishlist/all/${username}`, {
+      const response = await axios.get(`http://ec2-34-199-255-228.compute-1.amazonaws.com:9094/wishlist/all/${username}`, {
         headers: { Authorization: `${token}` },
       });
 
@@ -57,7 +57,7 @@ function Wishlist() {
   const handleDeleteItem = async () => {
     try {
       if (selectedItem) {
-        await axios.delete("http://localhost:9094/wishlist/delete", {
+        await axios.delete("http://ec2-34-199-255-228.compute-1.amazonaws.com:9094/wishlist/delete", {
           data: {
             username: selectedItem.username,
             date: selectedItem.date,

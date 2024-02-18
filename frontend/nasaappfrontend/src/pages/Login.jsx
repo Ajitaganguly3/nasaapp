@@ -92,7 +92,7 @@ export default function SignIn() {
 
         };
 
-        axios.post('http://localhost:9090/auth/authenticate', payload)
+        axios.post('http://ec2-34-199-255-228.compute-1.amazonaws.com:9090/auth/authenticate', payload)
             .then(async (response) => {
                 console.log(response.data);
                 setUsername('');

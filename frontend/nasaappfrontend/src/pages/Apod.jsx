@@ -112,7 +112,7 @@ function Apod() {
                 username,
             };
 
-            await axios.post("http://localhost:9094/wishlist/add", wishlistItems,
+            await axios.post("http://ec2-34-199-255-228.compute-1.amazonaws.com:9094/wishlist/add", wishlistItems,
                 { headers: { Authorization: `${token}` } });
             console.log("Added to wishlist successfully: ", apod.title);
             handleSnackbarOpen();

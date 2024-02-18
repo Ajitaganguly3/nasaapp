@@ -129,7 +129,7 @@ export default function SignUp() {
             confirmPassword: confirmPassword,
         };
 
-        axios.post('http://localhost:8083/user/register', payload)
+        axios.post('http://ec2-34-199-255-228.compute-1.amazonaws.com:8083/user/register', payload)
             .then(async (response) => {
                 console.log(response.data);
                 setUsername('');

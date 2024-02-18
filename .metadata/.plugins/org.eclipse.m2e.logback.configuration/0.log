@@ -3552,3 +3552,18 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.springfra
 2024-02-17 15:24:29,367 [Worker-64: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\nasapp_workspace\nasaapp\backend\wishlist\src\test\resources
 2024-02-17 15:26:18,150 [main] INFO  o.e.m2e.actions.ExecutePomAction - Creating new launch configuration
 2024-02-17 15:26:27,426 [Worker-62: Launching registration] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\2106613\Documents\nasapp_workspace\nasaapp\backend\registration
+2024-02-17 15:26:27,426 [Worker-62: Launching registration] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -B -Dstyle.color=always clean package
+2024-02-17 21:28:55,001 [Worker-77: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-02-17 21:28:55,166 [Worker-77: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-02-17 21:28:55,168 [Worker-77: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\nasapp_workspace\nasaapp\backend\registration\src\test\resources
+2024-02-18 18:02:00,977 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2024-02-18 18:41:43,334 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-02-18 18:41:43,465 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-02-18 18:41:43,482 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\nasapp_workspace\nasaapp\backend\wishlist\src\test\resources
+2024-02-18 18:41:57,352 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-02-18 18:41:57,367 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-02-18 18:41:57,371 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\nasapp_workspace\nasaapp\backend\registration\src\test\resources
+2024-02-18 18:42:08,363 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2024-02-18 18:42:08,386 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2024-02-18 18:42:08,392 [Worker-15: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\2106613\Documents\nasapp_workspace\nasaapp\backend\login\src\test\resources
+2024-02-18 18:42:55,384 [Worker-4: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
