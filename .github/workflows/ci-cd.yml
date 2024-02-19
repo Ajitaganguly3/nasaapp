@@ -27,8 +27,62 @@ jobs:
         java-version: '17'
         distribution: 'corretto'
         
-    - name: checking directories
+    - name: Build EurekaService
       run: |
-        ls -la
+        cd backend/nasaAppEurekaService
+        chmod +x mvnw
+        ./mvnw clean package -DskipTests
+
+    - name: Start EurekaService
+      run: |
+        cd backend/nasaAppEurekaService
+        java -jar target/eureka-service.jar &
+
+    - name: Build ConfigServer
+      run: |
+        cd backend/nasaAppConfigServer
+        chmod +x mvnw
+        ./mvnw clean package -DskipTests
+
+    - name: Start ConfigServer
+      run: |
+        cd backend/nasaAppConfigServer
+        java -jar target/config-server.jar &
+
+    - name: Build and Start Api Gateway
+      run: |
+        cd backend/nasaApiGateway
+        chmod +x mvnw
+        ./mvnw clean package -DskipTests
+        java -jar target/api-gateway.jar &
+
+        
+    - name: Build and start Registration
+      run: |
+        cd backend/registration
+        chmod +x mvnw
+        ./mvnw clean package -DskipTests
+        java -jar target/registration.jar &
+
+    - name: Build and start Login
+      run: |
+        cd backend/login
+        chmod +x mvnw
+        ./mvnw clean package -DskipTests
+        java -jar target/login.jar &
+
+    - name: Build and start Apod
+      run: |
+        cd backend/apod
+        chmod +x mvnw
+        ./mvnw clean package -DskipTests
+        java -jar target/apod.jar &
+
+    - name: Build and start wishlist
+      run: |
+        cd backend/wishlist
+        chmod +x mvnw
+        ./mvnw clean package -DskipTests
+        java -jar target/wishlist.jar &
 
    
